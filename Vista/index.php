@@ -43,7 +43,7 @@ if(@$_GET[logout])    session_unset();
             
                 <?php
                     if(!@$_SESSION[usuario]){
-                        echo '<p><a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> |';
+                        echo '<p><a class="iframes fancybox.iframe" href="registre.php">Registrate</a> | ';
                         echo '<a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>';
                     }else
                     {
@@ -73,22 +73,22 @@ if(@$_GET[logout])    session_unset();
 		
 			</div>
 		</div>
-			<div id="contenedor_atraccion">
-			<?php
-                            $atraccions = new Atraccions();
-                            $result = $atraccions->getAtraccions();
-                            for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-			
-                                echo '<div id="atraccion">';
-                                echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
-				echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                                echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'...</div>';
-				echo '</div>';
-                                
-                            }
-                        ?>
-							
-			</div>
+                    <div id="contenedor_atraccion">
+                    <?php
+                        $atraccions = new Atraccions();
+                        $result = $atraccions->getAtraccions();
+                        for ($i = 0; $i < mysql_num_rows($result); $i++ ){
+                            echo '<a class="iframes fancybox.iframe" href="login.php">';
+                            echo '<div id="atraccion">';
+                            echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                            echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
+                            echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'...</div>';
+                            echo '</a></div>';
+
+                        }
+                    ?>
+
+                        </div>
 		</div>
         <div id="peu"></div>
 </div>

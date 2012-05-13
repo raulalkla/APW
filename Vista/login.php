@@ -39,6 +39,7 @@ require_once '../Logica/Usuaris.php';
 
                 @$_SESSION[usuario] = $_POST[usuario];
                 echo "<p><b>Bienvenido ".@$_POST[usuario]." !</b></p>";
+                echo "<p><b>Tienes 13 notificaciones!</b></p>";
                 echo "<meta http-equiv='Refresh' content='1;url=index.php'>";
 
             }else {
