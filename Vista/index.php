@@ -3,9 +3,11 @@ session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
+
   $Connexio = new Connexio('root','root','');
   $Connexio->connectar();
   $Connexio->selectdb("socialtravel");
+  
 if(@$_GET[logout])    session_unset();
 
 ?>
@@ -34,6 +36,11 @@ if(@$_GET[logout])    session_unset();
 		openEffect	: 'none',
 		closeEffect	: 'none'
                 });
+                   	
+	   $("#miPerfil").click(function(evento){ 
+               $("#contenedor_atraccion").load("perfil.php"); 
+           });
+           
 	});
 </script>
 </head>
@@ -47,14 +54,17 @@ if(@$_GET[logout])    session_unset();
                         echo '<a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>';
                     }else
                     {
-                        echo "<p>Notificaciones (0) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
-                    }
+                        echo "<p><a id='miPerfil' href='#'>Mi perfil </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
+               
+                    echo "<p style='margin-top:-10px'>
+			Cesta(0)
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src='img/cesta.png' width=20px; height=20px/>
+                        </p>";
+                         }
                 ?>
-		<p> 
-			<form name="suscripcion">
-			<input type="text" name="correo" value="Suscribe tu email..."/>
-			</form>
-                </p>
 	</div>
 </div>
 <div id="contenedor"> 
