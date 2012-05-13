@@ -1,15 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html>
 <?php
+session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
   $Connexio = new Connexio('root','root','');
   $Connexio->connectar();
   $Connexio->selectdb("socialtravel");
+if(@$_GET[logout])    session_unset();
+
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Social Travel</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script> 
 <script type="text/javascript" src="js/jquery.mousewheel-3.0.4.pack.js"></script>
@@ -33,11 +37,19 @@ require_once '../Logica/Atraccions.php';
 	});
 </script>
 </head>
-
 <body>
 <div id="cap_sup"> 	
 	<div id="cont_suscripcion">
-            <p> <a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> | <a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>
+            
+                <?php
+                    if(!@$_SESSION[usuario]){
+                        echo '<p><a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> |';
+                        echo '<a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>';
+                    }else
+                    {
+                        echo "<p>Notificaciones (0) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
+                    }
+                ?>
 		<p> 
 			<form name="suscripcion">
 			<input type="text" name="correo" value="Suscribe tu email..."/>
@@ -54,10 +66,8 @@ require_once '../Logica/Atraccions.php';
 			<div id="recomendaciones">
 			
 				<?php 
-					for($x = 0; $x < 5; $x++){
-					
-					echo "<div id='recomendacion'>Recomendacion $x	</div>";
-					
+					for($x = 0; $x < 5; $x++){			
+                                            echo "<div id='recomendacion'>Recomendacion $x	</div>";
 					} 
 				?>
 		
@@ -85,6 +95,6 @@ require_once '../Logica/Atraccions.php';
 </body>
 </html>
 <?php
-    //echo "<pre>";
-    //print_r($_POST);
+    echo "<pre>";
+    print_r($_SESSION);
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 ?>
@@ -36,6 +37,7 @@ require_once '../Logica/Usuaris.php';
         $usuari = new Usuaris();
             if(@$usuari->autentificarUsuari($_POST[usuario],$_POST[password])){
 
+                @$_SESSION[usuario] = $_POST[usuario];
                 echo "<p><b>Bienvenido ".@$_POST[usuario]." !</b></p>";
                 echo "<meta http-equiv='Refresh' content='1;url=index.php'>";
 
