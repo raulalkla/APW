@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of Usuaris
- *
- * @author Raul
- */
 class Usuaris {
     
     public function getUsuaris(){
@@ -21,6 +16,13 @@ class Usuaris {
     
     public function validaUsuari($dni){
         $sql = "SELECT * FROM usuaris WHERE dni = '".$dni."'";
+        $result = mysql_query($sql);
+        if(mysql_num_rows($result) == 0) return false;
+        return true;
+    }
+    public function autentificarUsuari($nom,$password){
+        
+        $sql = "SELECT * FROM usuaris WHERE nom = '".$nom."' AND password = md5('".$password."')";
         $result = mysql_query($sql);
         if(mysql_num_rows($result) == 0) return false;
         return true;

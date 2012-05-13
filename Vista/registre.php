@@ -1,4 +1,5 @@
-<?
+<?php
+
 require_once("../Logica/Connexio.php");
 require_once '../Logica/Usuaris.php';
 
@@ -11,15 +12,14 @@ require_once '../Logica/Usuaris.php';
         $usuari->setUsuari($_POST[nom], $_POST[cognom], $_POST[dni], $_POST[usuari], $_POST[pass]);
         echo "Regitrado!!";
     }
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
 ?>
 <html>
     <head>
         <script type="text/javascript">
-	$(document).ready(function() {
-              
+	$(document).ready(function() {    
             $("#form").bind("submit", function() { 
                 $.fancybox.showActivity(); 
                 $.ajax({ 
@@ -32,20 +32,7 @@ require_once '../Logica/Usuaris.php';
                         } 
                 }); 
                 return false; 
-            }); 
-            $(".prova").fancybox({
-		maxWidth	: 800,
-		maxHeight	: 600,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none'
-                });
-        
-                
+            });  
 	});
         </script>
     </head>

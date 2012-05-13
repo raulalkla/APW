@@ -1,11 +1,6 @@
 <?php
-
-    if($_POST){
-    
-        echo "dins";
-    
-    }else echo "fora";
-    
+require_once("../Logica/Connexio.php");
+require_once '../Logica/Usuaris.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,8 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <script type="text/javascript">
-	$(document).ready(function() {
-              
+	$(document).ready(function() {   
             $("#form").bind("submit", function() { 
                 $.fancybox.showActivity(); 
                 $.ajax({ 
@@ -27,28 +21,36 @@
                         } 
                 }); 
                 return false; 
-            }); 
-            $(".prova").fancybox({
-		maxWidth	: 800,
-		maxHeight	: 600,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none'
-                });
-        
-                
+            });         
 	});
 </script>
     </head>
     <body>
+        <?php
+        if($_POST){
+         
+        $Connexio = new Connexio('root','root','');
+        $Connexio->connectar();
+        $Connexio->selectdb("socialtravel");
+
+        $usuari = new Usuaris();
+            if(@$usuari->autentificarUsuari($_POST[usuario],$_POST[password])){
+
+                echo "<p><b>Bienvenido ".@$_POST[usuario]." !</b></p>";
+                echo "<meta http-equiv='Refresh' content='1;url=index.php'>";
+
+            }else {
+                echo "<img src='../Vista/img/error.png' align='center'/>";
+                echo "<p class='error'>Usuario/Password incorrectos</p>";
+            }
+        }else {
+             
+    ?>
         <form id="form" method="POST" style="text-align: right">
         Usuario: <input type="text" name="usuario"/>        <br />
         Password:<input type="password" name="password" />  <br />
         <input type="submit" name="login" value="Enviar"/>
         </form>
+    <?php } ?>
     </body>
 </html>
