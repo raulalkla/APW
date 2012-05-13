@@ -1,17 +1,8 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <p> Pàgina de registro </p>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+<?php
+require_once("../Logica/Connexio.php");
+    
+    $Connexio = new Connexio('root','','');
+    $Connexio->connectar();
+    $Connexio->selectdb("socialtravel");
+    $usuaris = $Connexio->query("SELECT * FROM usuaris");
+?>
