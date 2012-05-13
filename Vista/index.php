@@ -41,6 +41,7 @@ if(@$_GET[logout])    session_unset();
                $("#contenedor_atraccion").load("perfil.php"); 
            });
            
+           
 	});
 </script>
 </head>

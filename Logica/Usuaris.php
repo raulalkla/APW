@@ -7,6 +7,11 @@ class Usuaris {
         $result = mysql_query($sql);
         return $result;
     }
+    public function getUsuariByID($usuari){ // Suposem que la ID es el camp Usuari (Nickname)
+        $sql = "SELECT * FROM usuaris WHERE usuari = '".$usuari."'";
+        $result = mysql_query($sql);
+        return $result;
+    }
     
     public function setUsuari($nom, $cognom, $dni, $nom, $pass){
         $sql = "INSERT INTO usuaris (nom, cognom, dni, usuari, password)".
