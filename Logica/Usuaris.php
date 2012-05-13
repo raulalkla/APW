@@ -18,6 +18,13 @@ class Usuaris {
                 "VALUES('".$nom."', '".$cognom."', '".$dni."', '".$nom."', md5('".$pass."') )";
         mysql_query($sql);
     }
+    
+    public function validaUsuari($dni){
+        $sql = "SELECT * FROM usuaris WHERE dni = '".$dni."'";
+        $result = mysql_query($sql);
+        if(mysql_num_rows($result) == 0) return false;
+        return true;
+    }
 
 }
 
