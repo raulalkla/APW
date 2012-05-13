@@ -27,7 +27,7 @@ class Usuaris {
     }
     public function autentificarUsuari($nom,$password){
         
-        $sql = "SELECT * FROM usuaris WHERE nom = '".$nom."' AND password = md5('".$password."')";
+        $sql = "SELECT * FROM usuaris WHERE usuari = '".$nom."' AND password = md5('".$password."')";
         $result = mysql_query($sql);
         if(mysql_num_rows($result) == 0) return false;
         return true;

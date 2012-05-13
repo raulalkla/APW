@@ -47,7 +47,7 @@ if(@$_GET[logout])    session_unset();
 </head>
 <body>
 <div id="cap_sup"> 	
-	<div id="cont_suscripcion">
+    	<div id="cont_suscripcion">
             
                 <?php
                     if(!@$_SESSION[usuario]){
