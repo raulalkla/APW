@@ -52,18 +52,21 @@ if(@$_GET[logout])    session_unset();
                     if(!@$_SESSION[usuario]){
                         echo '<p><a class="iframes fancybox.iframe" href="registre.php">Registrate</a> | ';
                         echo '<a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>';
+                        echo "<form method='POST'>";
+                        echo "<input type='text' name='suscripcion' value='Suscribe tu email...'/>";
+                        echo "</form>";
                     }else
                     {
                         echo "<p><a id='miPerfil' href='#'>Mi perfil </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
                
-                    echo "<p style='margin-top:-10px'>
-			Cesta(0)
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src='img/cesta.png' width=20px; height=20px/>
-                        </p>";
-                         }
+                        echo "<p style='margin-top:-10px'>
+                            Cesta(0)
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src='img/cesta.png' width=20px; height=20px/>
+                            </p>";
+                    }
                 ?>
 	</div>
 </div>
