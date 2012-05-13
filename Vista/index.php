@@ -32,7 +32,7 @@
 <body>
 <div id="cap_sup"> 	
 	<div id="cont_suscripcion">
-            <p> <a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> | Accede </p>
+            <p> <a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> | <a  class="iframes fancybox.iframe" href="login.php">Accede</a> </p>
 		<p> 
 			<form name="suscripcion">
 			<input type="text" name="correo" value="Suscribe tu email..."/>
