@@ -78,7 +78,7 @@ if(@$_GET[logout])    session_unset();
                         $atraccions = new Atraccions();
                         $result = $atraccions->getAtraccions();
                         for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                            echo '<a class="iframes fancybox.iframe" href="login.php">';
+                            echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                             echo '<div id="atraccion">';
                             echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
                             echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
