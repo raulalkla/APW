@@ -2,6 +2,10 @@
 session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
+    $Connexio = new Connexio('root','root','');
+    $Connexio->connectar();
+    $Connexio->selectdb("socialtravel");
+    $usuari = new Usuaris();
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,15 +33,14 @@ require_once '../Logica/Usuaris.php';
     <body>
         <?php
         if(@$_POST){ 
-            
-           
+         
+            $usuari = new Usuaris();
+            $usuari->updateUsuari(@utf8_encode($_POST[nom]),@utf8_encode($_POST[cognom]),@utf8_encode($_POST[dni]),@utf8_encode($_POST[usuari]),@utf8_encode($_POST[pass]));
+            echo "<p><B>Datos modificados correctamente</B></p>";
         }
         else{
             
-            $Connexio = new Connexio('root','root','');
-            $Connexio->connectar();
-            $Connexio->selectdb("socialtravel");
-            $usuari = new Usuaris();
+           
             $result = $usuari->getUsuariByID(@$_SESSION[usuario]);
             echo "<p style='text-align:left; font-size:14px'><B>Datos personales:</B></p>";
             echo "<form id='form' method='POST'>";

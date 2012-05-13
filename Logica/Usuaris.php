@@ -13,9 +13,9 @@ class Usuaris {
         return $result;
     }
     
-    public function setUsuari($nom, $cognom, $dni, $nom, $pass){
+    public function setUsuari($nom, $cognom, $dni, $usuari, $pass){
         $sql = "INSERT INTO usuaris (nom, cognom, dni, usuari, password)".
-                "VALUES('".$nom."', '".$cognom."', '".$dni."', '".$nom."', md5('".$pass."') )";
+                "VALUES('".$nom."', '".$cognom."', '".$dni."', '".$usuari."', md5('".$pass."') )";
         mysql_query($sql);
     }
     
@@ -32,7 +32,12 @@ class Usuaris {
         if(mysql_num_rows($result) == 0) return false;
         return true;
     }
-
+    public function updateUsuari($nom, $cognom, $dni, $usuari, $pass){
+        
+        $sql = "UPDATE usuaris SET nom = '".$nom."', cognom = '".$cognom."', dni = '".$dni."', usuari = '".$usuari."', password = md5('".$pass."') ".
+               "WHERE usuari = '".$usuari."'";
+        mysql_query($sql);
+    }
 }
 
 ?>
