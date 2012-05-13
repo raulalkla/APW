@@ -1,7 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html>
+<?php
+require_once '../Logica/Connexio.php';
+require_once '../Logica/Usuaris.php';
+require_once '../Logica/Atraccions.php';
+  $Connexio = new Connexio('root','root','');
+  $Connexio->connectar();
+  $Connexio->selectdb("socialtravel");
+?>
 <head>
 <title>Social Travel</title>
-<meta content="text/html; charset=iso-8859-1" http-equiv=Content-Type></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script> 
 <script type="text/javascript" src="js/jquery.mousewheel-3.0.4.pack.js"></script>
@@ -11,7 +19,6 @@
 <link rel="stylesheet" href="css/estil.css" type="text/css" media="screen" />
 <script type="text/javascript">
 	$(document).ready(function() {
-            
             $(".iframes").fancybox({
 		maxWidth	: 800,
 		maxHeight	: 600,
@@ -23,8 +30,6 @@
 		openEffect	: 'none',
 		closeEffect	: 'none'
                 });
-        
-                
 	});
 </script>
 </head>
@@ -57,50 +62,21 @@
 				?>
 		
 			</div>
-
-
 		</div>
 			<div id="contenedor_atraccion">
+			<?php
+                            $atraccions = new Atraccions();
+                            $result = $atraccions->getAtraccions();
+                            for ($i = 0; $i < mysql_num_rows($result); $i++ ){
 			
-				<div id="atraccion"> 
-				
-					<div id="foto_atraccion"></div>
-					<div id="descripcion_atraccion">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Ut in felis id sem eleifend faucibus in vitae odio.
-					Lorem ipsum dolor sit amet...
-					</div>
-				</div>
-				<div id="atraccion"> 
-				
-					<div id="foto_atraccion"></div>
-					<div id="descripcion_atraccion">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Ut in felis id sem eleifend faucibus in vitae odio.
-					Lorem ipsum dolor sit amet...
-					</div>
-				</div>
-				<br/>
-				<div id="atraccion"> 
-				
-					<div id="foto_atraccion"></div>
-					<div id="descripcion_atraccion">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Ut in felis id sem eleifend faucibus in vitae odio.
-					Lorem ipsum dolor sit amet...
-					
-				</div>
-				</div>
-							<div id="atraccion"> 
-				
-					<div id="foto_atraccion"></div>
-					<div id="descripcion_atraccion">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Ut in felis id sem eleifend faucibus in vitae odio.
-					Lorem ipsum dolor sit amet...
-					
-					</div>
-				</div>
+                                echo '<div id="atraccion">';
+                                echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+				echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
+                                echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'...</div>';
+				echo '</div>';
+                                
+                            }
+                        ?>
 							
 			</div>
 		</div>

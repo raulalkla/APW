@@ -1,5 +1,5 @@
 <?php
-require_once("../Logica/Connexio.php");
+require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 ?>
 <!DOCTYPE html>

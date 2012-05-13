@@ -1,6 +1,5 @@
 <?php
-
-require_once("../Logica/Connexio.php");
+require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 
     if($_POST){
