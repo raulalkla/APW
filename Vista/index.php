@@ -4,7 +4,7 @@ require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
 
-  $Connexio = new Connexio('root','root','');
+  $Connexio = new Connexio('pau','pau','');
   $Connexio->connectar();
   $Connexio->selectdb("socialtravel");
   

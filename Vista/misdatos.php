@@ -2,7 +2,7 @@
 session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
-    $Connexio = new Connexio('root','root','');
+    $Connexio = new Connexio('pau','pau','');
     $Connexio->connectar();
     $Connexio->selectdb("socialtravel");
     $usuari = new Usuaris();

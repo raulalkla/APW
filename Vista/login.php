@@ -30,7 +30,7 @@ require_once '../Logica/Usuaris.php';
         <?php
         if($_POST){
          
-        $Connexio = new Connexio('root','root','');
+        $Connexio = new Connexio('pau','pau','');
         $Connexio->connectar();
         $Connexio->selectdb("socialtravel");
 
