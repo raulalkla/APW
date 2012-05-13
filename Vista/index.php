@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html>
 <head>
 <title>Social Travel</title>
+<meta content="text/html; charset=iso-8859-1" http-equiv=Content-Type></meta>
+
 <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script> 
 <script type="text/javascript" src="js/jquery.mousewheel-3.0.4.pack.js"></script>
 <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
@@ -30,7 +32,7 @@
 <body>
 <div id="cap_sup"> 	
 	<div id="cont_suscripcion">
-            <p> <a  class="iframes fancybox.iframe" href="registro.php">Registrate</a> | Accede </p>
+            <p> <a  class="iframes fancybox.iframe" href="registre.php">Registrate</a> | Accede </p>
 		<p> 
 			<form name="suscripcion">
 			<input type="text" name="correo" value="Suscribe tu email..."/>

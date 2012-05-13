@@ -1,3 +1,4 @@
+<meta content="text/html; charset=iso-8859-1" http-equiv=Content-Type>
 <?php
 
 class Connexio {
