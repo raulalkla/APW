@@ -26,9 +26,10 @@
         echo "<div id='botonsPerfil'><B> 
             <table border=0 id='tableBotones'>
                 <tr>
-                    <td> <a href='misdatos.php' class='iframes fancybox.iframe' id='misDatos'>Mis datos</a> </td>
+                    <td> <a href='dades.php' class='iframes fancybox.iframe' id='misDatos'>Mis datos</a> </td>
                     <td> <a href='#' id='misCompras'>Historial compras</a> </td>
                     <td> <a href='#' id='misAmistades'>Mis amistades</a> </td>
+                    <td> <a href='preferencies.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td>
                   
                 </tr>
             </table></B>

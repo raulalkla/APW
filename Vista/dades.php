@@ -19,7 +19,7 @@ require_once '../Logica/Usuaris.php';
                 $.ajax({ 
                         type    : "POST", 
                         cache   : false, 
-                        url     : "misdatos.php", 
+                        url     : "dades.php", 
                         data    : $(this).serializeArray(), 
                         success: function(data) { 
                                 $.fancybox(data); 

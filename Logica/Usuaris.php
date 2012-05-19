@@ -11,8 +11,7 @@ class Usuaris {
         $sql = "SELECT * FROM usuaris WHERE usuari = '".$usuari."'";
         $result = mysql_query($sql);
         return $result;
-    }
-    
+    }    
     public function setUsuari($nom, $cognom, $dni, $usuari, $pass){
         $sql = "INSERT INTO usuaris (nom, cognom, dni, usuari, password)".
                 "VALUES('".$nom."', '".$cognom."', '".$dni."', '".$usuari."', md5('".$pass."') )";
