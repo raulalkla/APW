@@ -14,7 +14,12 @@ class Preferencies {
         $result = mysql_query($sql);
         return $result;
     }
-   
+    public function delPreferenciaUsuari($idPreferencia,$idUsuari)
+    {
+        $sql = "DELETE FROM preferencies WHERE usuari = ".$idUsuari." AND tipus_atraccio = ".$idPreferencia.";";
+        $result = mysql_query($sql);
+        return $result;
+    }
 }
 
 ?>

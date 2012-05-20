@@ -27,7 +27,12 @@ require_once '../Logica/Preferencies.php';
                         }); 
                         return false; 
                     });  
-                });
+
+                    $('a.idEliminar').click(function(){
+                        var txt=$(this).attr("rel");
+                        $("#contenedor_preferencias").load("preferencies.php?idEliminar="+txt); 
+                    });                        
+                });                    
         </script>
         <style type="text/css">
             table.hovertable {
@@ -57,7 +62,13 @@ require_once '../Logica/Preferencies.php';
         </style>
     </head>
     <body>
+        <div id="contenedor_preferencias">
         <?php
+        if($_GET['idEliminar']){
+            
+            $preferencies->delPreferenciaUsuari($_GET['idEliminar'], $_SESSION['idUsuario']);
+        
+        }
         if(@$_POST){ 
          
             ///$preferencies = new Preferencies();
@@ -73,21 +84,21 @@ require_once '../Logica/Preferencies.php';
             echo "<table border=0 class='hovertable'>";
            
             echo    "<tr>";
-            echo        "<td width='100px'><B>Atraccion</B></td>";
+            echo        "<td width='150px'><B>Atraccion</B></td>";
             echo        '<td><B>Eliminar</B></td>';
             echo    "</tr>";
             for ($i = 0; $i < mysql_num_rows($result); $i++ ){
                 echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
                 $resultPreferencias = $preferencies->getNomPrefByID(mysql_result($result,$i,2));
                 echo        "<td>".mysql_result($resultPreferencias,0,0)."</td>";
-                echo        '<td><img src="img/drop.png"/></td>';
+                echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,2)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
                 echo    "</tr>";
             }
             echo "</table>";
             echo "</form>"; 
         
         }
-        echo "<div id='guardarDades'> </div>";
         ?>
+        </div>
     </body>
 </html>
