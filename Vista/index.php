@@ -23,6 +23,7 @@ if(@$_GET[logout])    session_unset();
 
 <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 <link rel="stylesheet" href="css/estil.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/>
 <script type="text/javascript">
 	$(document).ready(function() {
             $(".iframes").fancybox({
@@ -36,19 +37,25 @@ if(@$_GET[logout])    session_unset();
 		openEffect	: 'none',
 		closeEffect	: 'none'
                 });
-                   	
+          
+           
 	   $("#miPerfil").click(function(evento){ 
                $("#contenedor_atraccion").load("perfil.php"); 
            });
            
            
+          
 	});
 </script>
 </head>
 <body>
+
+     
+
 <div id="cap_sup"> 	
+        
     	<div id="cont_suscripcion">
-            
+          
                 <?php
                     if(!@$_SESSION[usuario]){
                         echo '<p><a class="iframes fancybox.iframe" href="registre.php">Registrate</a> | ';
@@ -73,8 +80,13 @@ if(@$_GET[logout])    session_unset();
 </div>
 <div id="contenedor"> 
     
-    	<div id="sup"></div>
+    	<div id="sup">
+            <div id="iconosMenu" style="float:left; margin-left:60px; margin-top: 30px">
+                <a href="index.php"><img src="img/icon-home.png" /> </a>
+            </div>
+        </div>
         <div id="cos">
+            
 		<div id="dMenu"> 
 	
 			<div id="recomendaciones">
