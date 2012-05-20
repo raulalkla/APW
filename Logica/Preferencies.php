@@ -22,7 +22,6 @@ class Preferencies {
     public function setPreferenciaUsuari($idPreferencia,$idUsuari)
     {
         $sql = "INSERT INTO preferencies(usuari,tipus_atraccio) VALUES(".$idUsuari.",".$idPreferencia.");";
-        echo $sql;
         $result = mysql_query($sql);
         return $result;
     }
