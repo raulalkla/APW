@@ -120,7 +120,20 @@ if(@$_GET[logout])    session_unset();
 </div>
 </body>
 </html>
+
 <?php
-    echo "<pre>";
+    if($_GET["idcompra"]){
+        $num = sizeof($_SESSION["carro"]);
+        if ($num != 0)
+            $carro = $_SESSION["carro"];
+        
+        $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
+        $carro[$num]["quantitat"] = 1;
+        $carro[$num]["idAtraccio"] = $_GET["idcompra"];
+        $_SESSION["carro"] = $carro;
+        
+        echo "num = ".$num." carro = ".$carro;
+    }
+    echo "<pre>Sesio: ";
     print_r($_SESSION);
 ?>

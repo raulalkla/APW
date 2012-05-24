@@ -12,6 +12,13 @@ class Atraccions {
         $result = mysql_query($sql);
         return $result;
     }
+    
+    public function getPreu($id){
+        $sql = "SELECT preu FROM atraccio WHERE id = ".$id;
+        //echo $sql."  ";
+        $result = mysql_query($sql);
+        return mysql_result($result, 0);
+    }
 }
 
 ?>
