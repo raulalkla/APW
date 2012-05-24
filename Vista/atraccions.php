@@ -18,9 +18,12 @@ require_once '../Logica/Atraccions.php';
             $Atraccions = new Atraccions();
             $result = $Atraccions->getAtraccionByID(@$_GET[id]);  
             echo "<div id='detalleTitulo'><h2>".utf8_encode(mysql_result($result,0,1))."</h2></div>";
-            echo "<div id='detalleFoto'><img width=200px height=200px src='".utf8_encode(mysql_result($result,0,9))."' /></div>";
-            echo "<div id='detalleDescAtrac'>".utf8_encode(mysql_result($result,0,2))."</div>";
-            
+            echo "<div id='detalleFoto'><img width=200px height=200px src='".utf8_encode(mysql_result($result,0,9))."' />
+                                        <img width=20px; height=20px; src='img/likeButton.png' style='float:left; margin-top:5px'/>
+                                            </div>";
+            echo "<div id='detalleDescAtrac'>".utf8_encode(mysql_result($result,0,2))."";
+            echo "<div id='precioAtraccion'><br><B>".mysql_result($result,0,4)."</B>€<img id='botoComprar'style='float:right;' src='img/botoComprar.png' height=40px; width=140px;/></div></div>";
+           
         }
         ?>
     </body>
