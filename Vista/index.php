@@ -18,10 +18,16 @@ if($_GET["idcompra"]){
     $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
     $carro[$num]["quantitat"] = 1;
     $carro[$num]["idAtraccio"] = $_GET["idcompra"];
+    $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
     $_SESSION["carro"] = $carro;
 }
-
+/*
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+ */
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
@@ -46,7 +52,9 @@ if($_GET["idcompra"]){
 		autoSize	: false,
 		closeClick	: false,
 		openEffect	: 'none',
-		closeEffect	: 'none'
+		closeEffect	: 'none',
+                onClosed: function() { window.location.href = "index.php";
+                }    
                 });
           
            
@@ -130,7 +138,3 @@ if($_GET["idcompra"]){
 </div>
 </body>
 </html>
-
-<?php
-
-?>

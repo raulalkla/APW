@@ -5,6 +5,19 @@ require_once '../Logica/Atraccions.php';
     $Connexio = new Connexio('pau','pau','');
     $Connexio->connectar();
     $Connexio->selectdb("socialtravel");
+    
+if($_GET["idEliminar"]){
+
+    for($i = 0; $i < sizeof($_SESSION["carro"]) ; $i++){
+
+        if($_SESSION["carro"][$i]["idAtraccio"] == $_GET["idEliminar"]){
+            unset($_SESSION["carro"][$i]);
+           
+        }
+    }      
+}
+$_SESSION['carro']= array_values($_SESSION['carro']);
+   
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,9 +33,11 @@ require_once '../Logica/Atraccions.php';
                     $("#contenedor_atraccion").load("procesoCompra.php"); 
                 });
               });
-            function borraTubla($id){
-                unset($_SESSION["carro"][$id])
-            }
+            $('a.idEliminar').click(function(){
+                        var txt=$(this).attr("rel");
+                        $("#divCistella").load("cistella.php?idEliminar="+txt); 
+            });   
+           
         </script>
           <style type="text/css">
             table.hovertable {
@@ -52,10 +67,10 @@ require_once '../Logica/Atraccions.php';
         </style>
     </head>
     <body>
-        <div id ="divSistella" >
+        <div id ="divCistella" >
             <table id="taulaCistella" class="hovertable">
                 <tr>
-                    <td><b>Numero</b></td>
+                  <!--  <td><b>Numero</b></td> -->
                     <td><b>Nombre</b></td>
                     <td><b>Cantidad</b></td>
                     <td><b>Importe</b></td>
@@ -64,15 +79,13 @@ require_once '../Logica/Atraccions.php';
                 <?php
                 if($_SESSION["carro"]){
                     $numCompres = sizeof($_SESSION["carro"]);
-                    $atr = new Atraccions();
                     for ($i = 0; $i < $numCompres; $i++){
-                        $resultAtr = $atr->getAtraccionByID($_SESSION["carro"][$i]["idAtraccio"]);
                         echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                            echo "<td>". ($i+1) ."</td>";
-                            echo "<td>".utf8_encode(mysql_result($resultAtr,0,1))."</td>";
-                            echo "<td> <input type='text' size = 2 value = '".$_SESSION["carro"][$i]["quantitat"]."'> </td>";
+                          //  echo "<td>". ($i+1) ."</td>";
+                            echo "<td>".$_SESSION["carro"][$i]["nomAtraccio"]."</td>";
                             echo "<td>".$_SESSION["carro"][$i]["preu"]."</td>";
-                            echo "<td><a href='#' id = 'borraTuplaCompra' OnClick='borraTubla($i)'> <img src='img/drop.png' width=20px; height=20px; /> </a></td>";
+                            echo "<td> <input type='text' size = 2 value = '".$_SESSION["carro"][$i]["quantitat"]."'> </td>";
+                            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".$_SESSION["carro"][$i]["idAtraccio"]."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
                         echo "</tr>";
                     }
                 }
@@ -83,6 +96,6 @@ require_once '../Logica/Atraccions.php';
     </body>
 </html>
 <?php
-    echo "<pre>Sesio: ";
-    print_r($_SESSION);
+    
+  
 ?>
