@@ -43,8 +43,6 @@ if(@$_GET[logout])    session_unset();
                $("#contenedor_atraccion").load("perfil.php"); 
            });
            
-           
-          
 	});
 </script>
 </head>
@@ -52,7 +50,7 @@ if(@$_GET[logout])    session_unset();
 
      
 
-<div id="cap_sup"> 	
+<div id="cap_sup">
         
     	<div id="cont_suscripcion">
           
@@ -65,12 +63,14 @@ if(@$_GET[logout])    session_unset();
                         echo "</form>";
                     }else
                     {
-                        echo "<p><a id='miPerfil' href='#'>Mi perfil </a>
+                        $numCompres = sizeof($_SESSION["carro"]);
+                        
+                        echo "<p><a id='miPerfil' href='#'> Mi perfil </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
                
                         echo "<p style='margin-top:-10px'>
-                            Cesta(0)
+                            <a class='iframes fancybox.iframe' href='cistella.php'> Cesta($numCompres) </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <img src='img/cesta.png' width=20px; height=20px/>
                             </p>";
@@ -78,7 +78,7 @@ if(@$_GET[logout])    session_unset();
                 ?>
 	</div>
 </div>
-<div id="contenedor"> 
+<div id="contenedor">
     
     	<div id="sup">
             <div id="iconosMenu" style="float:left; margin-left:60px; margin-top: 30px">
@@ -99,23 +99,22 @@ if(@$_GET[logout])    session_unset();
 		
 			</div>
 		</div>
-                    <div id="contenedor_atraccion">
-                    <?php
-                        $atraccions = new Atraccions();
-                        $result = $atraccions->getAtraccions();
-                        for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                            echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
-                            echo '<div id="atraccion">';
-                            echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
-                            echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                            echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
-                            echo '</a></div>';
+                <div id="contenedor_atraccion">
+                <?php
+                    $atraccions = new Atraccions();
+                    $result = $atraccions->getAtraccions();
+                    for ($i = 0; $i < mysql_num_rows($result); $i++ ){
+                        echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
+                        echo '<div id="atraccion">';
+                        echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                        echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
+                        echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
+                        echo '</div></a>';
 
-                        }
-                    ?>
-
-                        </div>
-		</div>
+                    }
+                ?>
+                </div>
+        </div>
         <div id="peu"></div>
 </div>
 </body>
@@ -131,8 +130,6 @@ if(@$_GET[logout])    session_unset();
         $carro[$num]["quantitat"] = 1;
         $carro[$num]["idAtraccio"] = $_GET["idcompra"];
         $_SESSION["carro"] = $carro;
-        
-        echo "num = ".$num." carro = ".$carro;
     }
     echo "<pre>Sesio: ";
     print_r($_SESSION);

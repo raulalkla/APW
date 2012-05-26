@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Atraccions.php';
     $Connexio = new Connexio('pau','pau','');
@@ -22,7 +23,10 @@ require_once '../Logica/Atraccions.php';
                                         <img width=20px; height=20px; src='img/likeButton.png' style='float:left; margin-top:5px'/>
                                             </div>";
             echo "<div id='detalleDescAtrac'>".utf8_encode(mysql_result($result,0,2))."";
-            echo "<div id='precioAtraccion'><br><B>".mysql_result($result,0,4)."</B>€<a href='?idcompra=".mysql_result($result,0,0)."'><img id='botoComprar'style='float:right;' src='img/botoComprar.png' height=40px; width=140px;/></a></div></div>";
+            if($_SESSION[usuario])
+                echo "<div id='precioAtraccion'><br><B>".mysql_result($result,0,4)."</B>€<a href='?idcompra=".mysql_result($result,0,0)."'><img id='botoComprar'style='float:right;' src='img/botoComprar.png' height=40px; width=140px;/></a></div></div>";
+            else
+                echo "<div id='precioAtraccion'><br><B>".mysql_result($result,0,4)."</B>€</div></div>";
            
         }
         ?>
