@@ -34,12 +34,12 @@ $_SESSION['carro']= array_values($_SESSION['carro']);
                 });
               });
             $('a.idEliminar').click(function(){
-                        var txt=$(this).attr("rel");
-                        $("#divCistella").load("cistella.php?idEliminar="+txt); 
+                var txt=$(this).attr("rel");
+                $("#divCistella").load("cistella.php?idEliminar="+txt); 
             });   
            
         </script>
-          <style type="text/css">
+        <style type="text/css">
             table.hovertable {
                     font-family: verdana,arial,sans-serif;
                     font-size:11px;
@@ -68,30 +68,32 @@ $_SESSION['carro']= array_values($_SESSION['carro']);
     </head>
     <body>
         <div id ="divCistella" >
-            <table id="taulaCistella" class="hovertable">
-                <tr>
-                  <!--  <td><b>Numero</b></td> -->
-                    <td><b>Nombre</b></td>
-                    <td><b>Cantidad</b></td>
-                    <td><b>Importe</b></td>
-                    <td><b>Borrar</b></td>
-                </tr>
-                <?php
-                if($_SESSION["carro"]){
-                    $numCompres = sizeof($_SESSION["carro"]);
-                    for ($i = 0; $i < $numCompres; $i++){
-                        echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                          //  echo "<td>". ($i+1) ."</td>";
-                            echo "<td>".$_SESSION["carro"][$i]["nomAtraccio"]."</td>";
-                            echo "<td>".$_SESSION["carro"][$i]["preu"]."</td>";
-                            echo "<td> <input type='text' size = 2 value = '".$_SESSION["carro"][$i]["quantitat"]."'> </td>";
-                            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".$_SESSION["carro"][$i]["idAtraccio"]."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
-                        echo "</tr>";
+            <form method="GET">
+                <table id="taulaCistella" class="hovertable">
+                    <tr>
+                    <!--  <td><b>Numero</b></td> -->
+                        <td><b>Nombre</b></td>
+                        <td><b>Cantidad</b></td>
+                        <td><b>Importe</b></td>
+                        <td><b>Borrar</b></td>
+                    </tr>
+                    <?php
+                    if($_SESSION["carro"]){
+                        $numCompres = sizeof($_SESSION["carro"]);
+                        for ($i = 0; $i < $numCompres; $i++){
+                            echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
+                            //  echo "<td>". ($i+1) ."</td>";
+                                echo "<td>".$_SESSION["carro"][$i]["nomAtraccio"]."</td>";
+                                echo "<td>".$_SESSION["carro"][$i]["preu"]."</td>";
+                                echo "<td> <input type='text' size=2 name='quant$i' value = '".$_SESSION["carro"][$i]["quantitat"]."'> </td>";
+                                echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".$_SESSION["carro"][$i]["idAtraccio"]."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
+                            echo "</tr>";
+                        }
                     }
-                }
-                ?>
-            </table>
-            <input id="comprar" type="submit" value="Comprar!" style="position: right">
+                    ?>
+                </table>
+            <input id="comprar" type="submit" name="comprar" value="Comprar" style="position: right">
+            </form>
         </div>
     </body>
 </html>

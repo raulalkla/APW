@@ -18,9 +18,12 @@ class LiniaPedido {
         return $result;
     }
     
-    public function insertLinea($preu, $cantitat, $atraccio){
-        $sql = "INSERT INTO linies_comanda (preu, cantitat, atraccio) values( ".$preu.", ".$cantitat.", ".$atraccio.")";
-        mysql_query($sql);
+    public function insertLinea($preu, $cantitat, $atraccio, $idUsuari){
+        $sqlLinia = "INSERT INTO linies_comanda (preu, cantitat, atraccio) values( ".$preu.", ".$cantitat.", ".$atraccio.")";
+        mysql_query($sqlLinia);
+        
+        $sqlHisto = "INSERT INTO historic_compres (id, linia_comanda) values( ".$idUsuari.", (SELECT MAX(id) FROM linies_comanda WHERE preu=".$preu." AND cantitat=".$cantitat." AND atraccio=".$atraccio."))";
+        mysql_query($sqlHisto);
     }
     
 }

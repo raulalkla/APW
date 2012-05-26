@@ -15,7 +15,7 @@ require_once '../Logica/TipusAtraccions.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <script type="text/javascript">
-                $(document).ready(function() {    
+                $(document).ready(function() {
                     $("#form").bind("submit", function() { 
                         $.fancybox.showActivity(); 
                         $.ajax({ 

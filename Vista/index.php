@@ -3,6 +3,7 @@ session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
+require_once '../Logica/LiniaPedido.php';
 
   $Connexio = new Connexio('pau','pau','');
   $Connexio->connectar();
@@ -21,11 +22,15 @@ if($_GET["idcompra"]){
     $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
     $_SESSION["carro"] = $carro;
 }
-/*
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
- */
+if($_GET["comprar"]){
+    $num = sizeof($_SESSION["carro"]);
+    $lp = new LiniaPedido();
+    for($i=0; $i < $num; $i++){
+        $lp->insertLinea($_SESSION["carro"][$i]["preu"], $_GET["quant$i"], $_SESSION["carro"][$i]["idAtraccio"], $_SESSION["idUsuario"]);
+    }
+    echo "Compra realizada!";
+    unset($_SESSION["carro"]);
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -138,3 +143,8 @@ echo "</pre>";
 </div>
 </body>
 </html>
+
+<?php
+    echo "<pre>";
+    print_r($_SESSION);
+?>
