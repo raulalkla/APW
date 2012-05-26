@@ -26,9 +26,9 @@ if($_GET["comprar"]){
     $num = sizeof($_SESSION["carro"]);
     $lp = new LiniaPedido();
     for($i=0; $i < $num; $i++){
-        $lp->insertLinea($_SESSION["carro"][$i]["preu"], $_GET["quant$i"], $_SESSION["carro"][$i]["idAtraccio"], $_SESSION["idUsuario"]);
+        $resul = $lp->insertLinea($_SESSION["carro"][$i]["preu"], $_GET["quant$i"], $_SESSION["carro"][$i]["idAtraccio"], $_SESSION["idUsuario"]);
+        if(!$resul) echo "Error en la compra!";
     }
-    echo "Compra realizada!";
     unset($_SESSION["carro"]);
 }
 ?>
