@@ -67,12 +67,12 @@ if(@$_GET[logout])    session_unset();
                         
                         echo "<p><a id='miPerfil' href='#'> Mi perfil </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px/></a></p>";
+                            <a href='?logout=1' style='margin-top:15px'><img src='img/logout.gif' width=20px; height=20px; /></a></p>";
                
                         echo "<p style='margin-top:-10px'>
                             <a class='iframes fancybox.iframe' href='cistella.php'> Cesta($numCompres) </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <img src='img/cesta.png' width=20px; height=20px/>
+                            <img src='img/cesta.png' width=20px; height=20px; />
                             </p>";
                     }
                 ?>
