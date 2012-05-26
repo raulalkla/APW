@@ -7,8 +7,19 @@ require_once '../Logica/Atraccions.php';
   $Connexio = new Connexio('pau','pau','');
   $Connexio->connectar();
   $Connexio->selectdb("socialtravel");
+  $atraccions = new Atraccions();
   
 if(@$_GET[logout])    session_unset();
+if($_GET["idcompra"]){
+    $num = sizeof($_SESSION["carro"]);
+    if ($num != 0)
+        $carro = $_SESSION["carro"];
+
+    $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
+    $carro[$num]["quantitat"] = 1;
+    $carro[$num]["idAtraccio"] = $_GET["idcompra"];
+    $_SESSION["carro"] = $carro;
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -101,7 +112,7 @@ if(@$_GET[logout])    session_unset();
 		</div>
                 <div id="contenedor_atraccion">
                 <?php
-                    $atraccions = new Atraccions();
+           
                     $result = $atraccions->getAtraccions();
                     for ($i = 0; $i < mysql_num_rows($result); $i++ ){
                         echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
@@ -121,16 +132,5 @@ if(@$_GET[logout])    session_unset();
 </html>
 
 <?php
-    if($_GET["idcompra"]){
-        $num = sizeof($_SESSION["carro"]);
-        if ($num != 0)
-            $carro = $_SESSION["carro"];
-        
-        $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
-        $carro[$num]["quantitat"] = 1;
-        $carro[$num]["idAtraccio"] = $_GET["idcompra"];
-        $_SESSION["carro"] = $carro;
-    }
-    echo "<pre>Sesio: ";
-    print_r($_SESSION);
+
 ?>
