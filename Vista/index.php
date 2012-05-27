@@ -15,12 +15,23 @@ if($_GET["idcompra"]){
     $num = sizeof($_SESSION["carro"]);
     if ($num != 0)
         $carro = $_SESSION["carro"];
-
-    $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
-    $carro[$num]["quantitat"] = 1;
-    $carro[$num]["idAtraccio"] = $_GET["idcompra"];
-    $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
-    $_SESSION["carro"] = $carro;
+    $nuevaCompra = true;
+    for($i = 0; $i<$num; $i++){
+        if($_SESSION["carro"][$i]["idAtraccio"] == $_GET["idcompra"]){
+            
+            $_SESSION["carro"][$i]["quantitat"] = $_SESSION["carro"][$i]["quantitat"]+1;
+            $nuevaCompra = false;
+        }
+    
+    }
+    
+    if($nuevaCompra){
+        $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
+        $carro[$num]["quantitat"] = 1;
+        $carro[$num]["idAtraccio"] = $_GET["idcompra"];
+        $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
+        $_SESSION["carro"] = $carro;
+    }
 }
 if($_GET["comprar"]){
     $num = sizeof($_SESSION["carro"]);
