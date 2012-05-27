@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-05-2012 a las 11:08:55
+-- Tiempo de generación: 27-05-2012 a las 17:26:42
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -110,10 +110,20 @@ INSERT INTO `estat` (`id`, `tipus`) VALUES
 
 CREATE TABLE IF NOT EXISTS `historic_compres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuari` int(11) NOT NULL,
   `linia_comanda` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `linia_comanda` (`linia_comanda`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `linia_comanda` (`linia_comanda`),
+  KEY `usuari` (`usuari`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `historic_compres`
+--
+
+INSERT INTO `historic_compres` (`id`, `usuari`, `linia_comanda`) VALUES
+(2, 1, 19),
+(3, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -124,12 +134,20 @@ CREATE TABLE IF NOT EXISTS `historic_compres` (
 CREATE TABLE IF NOT EXISTS `linies_comanda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `preu` int(11) NOT NULL,
-  `data` datetime NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cantitat` int(11) NOT NULL,
   `atraccio` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `atraccio` (`atraccio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Volcado de datos para la tabla `linies_comanda`
+--
+
+INSERT INTO `linies_comanda` (`id`, `preu`, `data`, `cantitat`, `atraccio`) VALUES
+(19, 1475, '2012-05-26 15:36:40', 2, 6),
+(20, 25, '2012-05-26 15:36:40', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -144,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `preferencies` (
   PRIMARY KEY (`id`),
   KEY `usuari` (`usuari`),
   KEY `tipus_atraccio` (`tipus_atraccio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `preferencies`
@@ -152,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `preferencies` (
 
 INSERT INTO `preferencies` (`id`, `usuari`, `tipus_atraccio`) VALUES
 (1, 1, 4),
-(2, 2, 2);
+(2, 2, 2),
+(3, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -239,19 +258,20 @@ CREATE TABLE IF NOT EXISTS `usuaris` (
   `dni` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `usuari` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(32) COLLATE utf8_spanish_ci NOT NULL COMMENT 'MD5!!!',
-  `historic_comandes` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `historic_comandes` (`historic_comandes`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`id`, `nom`, `cognom`, `dni`, `usuari`, `password`, `historic_comandes`) VALUES
-(1, 'Raul', 'Garcia Alcaraz', '20044932H', 'raul', 'bc7a844476607e1a59d8eb1b1f311830', NULL),
-(2, 'Pau', 'Martí Pellicer', '20047928Q', 'pau', '0ea58701b84295bdd11c5b05426c6c3f', NULL),
-(3, 'Temerari', 'Sinatra', '29832810A', 'teme', '994e2625e871f1c141c1cf4a69c5a200', NULL);
+INSERT INTO `usuaris` (`id`, `nom`, `cognom`, `dni`, `usuari`, `password`) VALUES
+(1, 'Raul', 'Garcia Alcaraz', '20044932H', 'raul', 'bc7a844476607e1a59d8eb1b1f311830'),
+(2, 'Pau', 'Martí Pellicer', '20047928Q', 'pau', '0ea58701b84295bdd11c5b05426c6c3f'),
+(3, 'Temerari', 'Sinatra', '29832810A', 'teme', '994e2625e871f1c141c1cf4a69c5a200'),
+(6, 'aaaa', 'aaa', '00000000L', 'aaaa', '47bce5c74f589f4867dbd57e9ca9f808'),
+(7, 'demo', 'mode', '00000000A', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229'),
+(8, 'demoooo2', 'a vore', '00000000L', 'demo2', '1066726e7160bd9c987c9968e0cc275a');
 
 --
 -- Restricciones para tablas volcadas
@@ -261,10 +281,10 @@ INSERT INTO `usuaris` (`id`, `nom`, `cognom`, `dni`, `usuari`, `password`, `hist
 -- Filtros para la tabla `atraccio`
 --
 ALTER TABLE `atraccio`
-  ADD CONSTRAINT `atraccio_ibfk_5` FOREIGN KEY (`tipus_atraccio`) REFERENCES `tipus_atraccio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `atraccio_ibfk_2` FOREIGN KEY (`promocio`) REFERENCES `promocio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `atraccio_ibfk_3` FOREIGN KEY (`desti`) REFERENCES `desti` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `atraccio_ibfk_4` FOREIGN KEY (`estat`) REFERENCES `estat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `atraccio_ibfk_4` FOREIGN KEY (`estat`) REFERENCES `estat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `atraccio_ibfk_5` FOREIGN KEY (`tipus_atraccio`) REFERENCES `tipus_atraccio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `desti`
@@ -276,7 +296,8 @@ ALTER TABLE `desti`
 -- Filtros para la tabla `historic_compres`
 --
 ALTER TABLE `historic_compres`
-  ADD CONSTRAINT `historic_compres_ibfk_1` FOREIGN KEY (`linia_comanda`) REFERENCES `linies_comanda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `historic_compres_ibfk_1` FOREIGN KEY (`linia_comanda`) REFERENCES `linies_comanda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `historic_compres_ibfk_2` FOREIGN KEY (`usuari`) REFERENCES `usuaris` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `linies_comanda`
@@ -303,12 +324,6 @@ ALTER TABLE `solicitud_amistat`
 --
 ALTER TABLE `tipus_atraccio`
   ADD CONSTRAINT `tipus_atraccio_ibfk_2` FOREIGN KEY (`estat`) REFERENCES `estat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuaris`
---
-ALTER TABLE `usuaris`
-  ADD CONSTRAINT `usuaris_ibfk_1` FOREIGN KEY (`historic_comandes`) REFERENCES `historic_compres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
