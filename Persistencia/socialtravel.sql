@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-05-2012 a las 17:26:42
+-- Tiempo de generación: 13-06-2012 a las 19:29:52
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -68,17 +68,18 @@ CREATE TABLE IF NOT EXISTS `desti` (
   `estat` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `estat` (`estat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `desti`
 --
 
 INSERT INTO `desti` (`id`, `nom`, `ubicacio`, `estat`) VALUES
-(1, 'Granada', 'Granada', NULL),
-(2, 'Fiordos', 'Noruega', NULL),
-(3, 'Asturias', 'Asturias', NULL),
-(4, 'Pekin', 'China', NULL);
+(1, 'Granada', 'Granada', 1),
+(2, 'Fiordos', 'Noruega', 1),
+(3, 'Asturias', 'Asturias', 1),
+(4, 'Pekin', 'China', 1),
+(5, 'pocon', 'aaa', 4);
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `historic_compres` (
   PRIMARY KEY (`id`),
   KEY `linia_comanda` (`linia_comanda`),
   KEY `usuari` (`usuari`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `historic_compres`
@@ -123,7 +124,9 @@ CREATE TABLE IF NOT EXISTS `historic_compres` (
 
 INSERT INTO `historic_compres` (`id`, `usuari`, `linia_comanda`) VALUES
 (2, 1, 19),
-(3, 1, 20);
+(3, 1, 20),
+(4, 1, 21),
+(5, 1, 22);
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `linies_comanda` (
   `atraccio` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `atraccio` (`atraccio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Volcado de datos para la tabla `linies_comanda`
@@ -147,7 +150,9 @@ CREATE TABLE IF NOT EXISTS `linies_comanda` (
 
 INSERT INTO `linies_comanda` (`id`, `preu`, `data`, `cantitat`, `atraccio`) VALUES
 (19, 1475, '2012-05-26 15:36:40', 2, 6),
-(20, 25, '2012-05-26 15:36:40', 1, 5);
+(20, 25, '2012-05-26 15:36:40', 1, 5),
+(21, 1475, '2012-05-27 15:28:31', 2, 6),
+(22, 999, '2012-05-27 15:28:31', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -258,20 +263,21 @@ CREATE TABLE IF NOT EXISTS `usuaris` (
   `dni` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `usuari` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(32) COLLATE utf8_spanish_ci NOT NULL COMMENT 'MD5!!!',
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`id`, `nom`, `cognom`, `dni`, `usuari`, `password`) VALUES
-(1, 'Raul', 'Garcia Alcaraz', '20044932H', 'raul', 'bc7a844476607e1a59d8eb1b1f311830'),
-(2, 'Pau', 'Martí Pellicer', '20047928Q', 'pau', '0ea58701b84295bdd11c5b05426c6c3f'),
-(3, 'Temerari', 'Sinatra', '29832810A', 'teme', '994e2625e871f1c141c1cf4a69c5a200'),
-(6, 'aaaa', 'aaa', '00000000L', 'aaaa', '47bce5c74f589f4867dbd57e9ca9f808'),
-(7, 'demo', 'mode', '00000000A', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229'),
-(8, 'demoooo2', 'a vore', '00000000L', 'demo2', '1066726e7160bd9c987c9968e0cc275a');
+INSERT INTO `usuaris` (`id`, `nom`, `cognom`, `dni`, `usuari`, `password`, `admin`) VALUES
+(1, 'Raul', 'Garcia Alcaraz', '20044932H', 'raul', 'bc7a844476607e1a59d8eb1b1f311830', 0),
+(2, 'Pau', 'Martí Pellicer', '20047928Q', 'pau', '0ea58701b84295bdd11c5b05426c6c3f', 0),
+(6, 'aaaa', 'aaa', '00000000L', 'aaaa', '47bce5c74f589f4867dbd57e9ca9f808', 0),
+(7, 'demo', 'mode', '00000000A', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 0),
+(8, 'demoooo2', 'a vore', '00000000L', 'demo2', '1066726e7160bd9c987c9968e0cc275a', 0),
+(9, 'Admin', 'Root', '99999999Z', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
 -- Restricciones para tablas volcadas
