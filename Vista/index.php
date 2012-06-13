@@ -4,12 +4,15 @@ require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
 require_once '../Logica/LiniaPedido.php';
+require_once '../Logica/Desti.php';
+
 
 $Connexio = new Connexio();
 $Connexio->connectar();
 $Connexio->selectdb("socialtravel");
 $atraccions = new Atraccions();
-  
+$desti = new Desti();
+print_r($_POST);
 if(@$_GET[logout])    session_unset();
 if($_GET["idcompra"]){
     $num = sizeof($_SESSION["carro"]);
@@ -139,12 +142,38 @@ if($_GET["comprar"]){
 <div id="contenedor">
     
     	<div id="sup">
-            <div id="iconosMenu" style="padding-top:30px; text-align: left; margin-left:60px; margin-top: 30px">
-                <a href="index.php"><img src="img/icon-home.png" /> </a> &nbsp;
-               <a onclick="javascript:bookmarksite();" href="javascript:void(0);">
-                    <img src="img/favoritos.png" height="15px" width="15px" />
-                </a>
+            <div id="iconosMenu" style="padding-top:30px; text-align: left; margin-right: 18%; margin-left:60px; margin-top: 30px">
+               <div style="">
+               
+                   
+                   <form name="form" method="POST" style="display:inline;">
+                        <select onchange="document.form.submit()" name="destino">
+                            <?php
+                               $result =  $desti->getDesti();
+                                  
+                               if($_POST[destino] == 'todos')  echo "<option selected value='todos'>Todas</option>";
+                               else echo "<option value='todos'>Todas</option>";
+                                  
+                                  for($i = 0; $i < mysql_num_rows($result); $i++ ){
+                                      
+                                    if($_POST[destino] == mysql_result($result,$i,0))     echo "<option selected value='".mysql_result($result,$i,0)."'>".mysql_result($result,$i,1)."</option>";
+                                    else echo "<option value='".mysql_result($result,$i,0)."'>".mysql_result($result,$i,1)."</option>";
+                                    
+                                    
+                                }
+                            ?>
+                        </select>
+                   </form> 
+                   
+                </div>
+                <div style="float:right; margin-top:-25px">
+                    <a href="index.php"><img src="img/icon-home.png" /> </a> &nbsp;
+                    <a onclick="javascript:bookmarksite();" href="javascript:void(0);">
+                            <img src="img/favoritos.png" height="15px" width="15px" />
+                    </a> &nbsp;<br>
+                </div>
 
+                
             </div>
         </div>
         <div id="cos">
@@ -163,8 +192,12 @@ if($_GET["comprar"]){
 		</div>
                 <div id="contenedor_atraccion">
                 <?php
-           
-                    $result = $atraccions->getAtraccions();
+                    if(!$_POST[destino] || $_POST[destino] == "todos"){
+                      $result = $atraccions->getAtraccions();
+                    }else{
+                      $result = $atraccions->getAtraccionByDesti($_POST[destino]);
+                    }
+                   
                     for ($i = 0; $i < mysql_num_rows($result); $i++ ){
                         echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                         echo '<div id="atraccion">';
