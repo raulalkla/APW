@@ -17,6 +17,18 @@ if($_GET[logout] == 1){
         <title>Social Travel</title>
         <link rel="stylesheet" href="../css/estil.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8"/>
+        
+        <script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script> 
+        <script type="text/javascript" src="../js/jquery.mousewheel-3.0.4.pack.js"></script>
+        <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+        $("#misCompras").click(function(evento){
+            $("#contenedorAdmin").load("altaDestino.php"); 
+            });
+        });
+        </script>
     </head>
     <body>
         <div id="cap_sup">
@@ -39,7 +51,6 @@ if($_GET[logout] == 1){
                         <td> <a href='#' id='misCompras'>Alta atraccion</a> </td>
                         <td> <a href='#' id='misAmistades'>Alta tipo atraccion</a> </td>
                         <!--<td> <a href='#' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td> -->
-
                     </tr>
                     </table>
                 </div>
