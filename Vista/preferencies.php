@@ -8,6 +8,7 @@ require_once '../Logica/TipusAtraccions.php';
     $Connexio->selectdb("socialtravel");
     $preferencies = new Preferencies();
     $tipusAtraccions = new TipusAtraccions();
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -6,7 +6,8 @@ require_once '../Logica/Usuaris.php';
   $Connexio = new Connexio();
   $Connexio->connectar();
   $solAmistad = new SolicitudAmistat();
-  
+  $usuario = new Usuaris();
+  print_r($_GET);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,10 @@ require_once '../Logica/Usuaris.php';
                     openEffect	: 'none',
                     closeEffect	: 'none'
                     });
-
+                $('a.idEliminar').click(function(){
+                        var txt=$(this).attr("rel");
+                        $("#contenedor_atraccion").load("perfil.php?idEliminar="+txt); 
+                    });      
             });
     </script>
       <style type="text/css">
@@ -60,6 +64,7 @@ require_once '../Logica/Usuaris.php';
     </head>
     <body>
         <?php
+        echo"<div id='contPerfil'>";
         echo "<div id='botonsPerfil' style='margin-top:-5%'><B> 
             <table border=0 id='tableBotones'>
                 <tr>
@@ -88,15 +93,18 @@ require_once '../Logica/Usuaris.php';
             $result = $solAmistad->getSolicitutByUser($_SESSION[idUsuario]);
             for ($i = 0; $i < mysql_num_rows($result); $i++ ){
             echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-            $result = $solAmistad->get(mysql_result($result,$i,2));
-            echo        "<td>".mysql_result($result,$i,1)."</td>";
+            $resultUsr = $usuario->getUsuariByID(mysql_result($result,$i,1));
+            echo        "<td>".mysql_result($resultUsr,0,1)."</td>";
+            echo        "<td>".mysql_result($result,$i,3)."</td>";
+            echo        "<td style='width:250px'>".mysql_result($result,$i,4)."</td>";
+            echo        "<td style='text-align:center'><a class='idAceptar' href='#' rel='".mysql_result($result,$i,0)."'><img src='img/aceptar.png' height=22px/></a></td>";
             echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,2)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
             echo    "</tr>";
                 
             }
-            echo "</div></table>";
+            echo "</div></table></div>";
 
         ?>
-         </table>
+         
     </body>
 </html>
