@@ -14,7 +14,7 @@ $Connexio->selectdb("socialtravel");
 $atraccions = new Atraccions();
 $desti = new Desti();
 $tipusAtraccio = new TipusAtraccions();
-
+print_r($_SESSION);
 if(@$_GET[logout])    session_unset();
 if($_GET["idcompra"]){
     $num = sizeof($_SESSION["carro"]);
@@ -144,9 +144,41 @@ if($_GET["comprar"]){
 <div id="contenedor">
     
     	<div id="sup">
-            <div id="iconosMenu" style="padding-top:30px; text-align: left; margin-right: 18%; margin-left:60px; margin-top: 30px">
-               <div style="">
-               
+            <div id="iconosMenu" style="padding-top:30px; text-align: right; margin-right: 18%; margin-left:60px; margin-top: 30px">
+           
+                <div style="">
+                    <a href="index.php"><img src="img/icon-home.png" /> </a> &nbsp;
+                    <a onclick="javascript:bookmarksite();" href="javascript:void(0);">
+                            <img src="img/favoritos.png" height="15px" width="15px" />
+                    </a> &nbsp;<br>
+                </div>
+
+                
+            </div>
+        </div>
+        <div id="cos">
+            
+		<div id="dMenu"> 
+	
+			<div id="recomendaciones">
+			
+				<?php 
+                                        echo "<p><b>Últimos anuncios:</b></p>";
+                                        $result = $atraccions->getAtraccionsUltimes();
+					for($x = 0; $x < 5; $x++){			
+                                            echo "<div id='recomendacion'>".utf8_encode(substr(mysql_result($result,$x,1),0,20))."...</div>";
+					} 
+				?>
+		
+			</div>
+		</div>
+                <div id="contenedor_atraccion">
+                
+                <div style="">
+                    
+                    <p style="display:inline; font-size: 15px; margin-right: 6%"><B>¡Ver recomendaciones!</B></p> 
+                  
+                    
                    
                    <form name="form" method="POST" style="display:inline;">
                        Destino: <select onchange="document.form.submit()" name="destino">
@@ -193,31 +225,9 @@ if($_GET["comprar"]){
                    
                    
                 </div>
-                <div style="float:right; margin-top:-25px">
-                    <a href="index.php"><img src="img/icon-home.png" /> </a> &nbsp;
-                    <a onclick="javascript:bookmarksite();" href="javascript:void(0);">
-                            <img src="img/favoritos.png" height="15px" width="15px" />
-                    </a> &nbsp;<br>
-                </div>
-
-                
-            </div>
-        </div>
-        <div id="cos">
-            
-		<div id="dMenu"> 
-	
-			<div id="recomendaciones">
-			
-				<?php 
-					for($x = 0; $x < 5; $x++){			
-                                            echo "<div id='recomendacion'>Recomendacion $x	</div>";
-					} 
-				?>
-		
-			</div>
-		</div>
-                <div id="contenedor_atraccion">
+                    
+                    
+                    
                 <?php
                     if(!$_POST[destino] || $_POST[destino] == "todos"){
                       $result = $atraccions->getAtraccions();
