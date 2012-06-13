@@ -224,9 +224,10 @@ if($_GET["comprar"]){
                     }else{
                       $result = $atraccions->getAtraccionByDesti($_POST[destino]);
                     }
-                   
+                   $numAtracciones = 0; // Contem les atraccions que mostrem
                     for ($i = 0; $i < mysql_num_rows($result); $i++ ){
                         if($_POST[tipusAtraccio] == mysql_result($result,$i,10) || $_POST[tipusAtraccio] == 'todos' || !$_POST[tipusAtraccio]){
+                            $numAtracciones++;
                             echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                             echo '<div id="atraccion">';
                             echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
@@ -235,6 +236,7 @@ if($_GET["comprar"]){
                             echo '</div></a>';
                         }
                     }
+                    if($numAtracciones == 0) echo "<p style='float:left'><br><B>&nbsp;&nbsp; - No hay atracciones para tu búsqueda!</B></p>";
                 ?>
                 </div>
         </div>
