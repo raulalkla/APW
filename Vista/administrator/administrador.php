@@ -32,7 +32,20 @@ if($_GET[logout] == 1){
                 </div>
             </div>
             <div id="cos">
+                <div id='botonsPerfil' style="margin-left: 50px">
+                    <table border=0 id='tableBotones'>
+                    <tr>
+                        <td> <a href='#' class='iframes fancybox.iframe' id='misDatos'>Alta destino</a> </td>
+                        <td> <a href='#' id='misCompras'>Alta atraccion</a> </td>
+                        <td> <a href='#' id='misAmistades'>Alta tipo atraccion</a> </td>
+                        <!--<td> <a href='#' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td> -->
 
+                    </tr>
+                    </table>
+                </div>
+                <div id='contenedorAdmin'>
+                    Aci mostrarem les notificacions...
+                </div>
             </div>
             <div id="peu"></div>
         </div>
