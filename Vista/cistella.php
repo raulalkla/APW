@@ -16,7 +16,7 @@ if($_GET["idEliminar"]){
         }
     }      
 }
-$_SESSION['carro']= array_values($_SESSION['carro']);
+$_SESSION['carro']= @array_values($_SESSION['carro']);
    
 ?>
 <!DOCTYPE html>

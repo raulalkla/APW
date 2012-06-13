@@ -79,6 +79,27 @@ if($_GET["comprar"]){
            });
            
 	});
+
+        function bookmarksite(title,url){
+
+        var title=String(document.title);
+        var url=String(window.location);
+
+        if (window.sidebar) // firefox
+                window.sidebar.addPanel(title, url, "");
+        else if(window.opera && window.print){ // opera
+                var elem = document.createElement('a');
+                elem.setAttribute('href',href);
+                elem.setAttribute('title',title);
+                elem.setAttribute('rel','sidebar');
+                elem.click();
+        } 
+        else if(document.all)// ie
+                window.external.AddFavorite(url, title);
+                else {// otros web Browsers
+            alert ("Presione Crtl+D para agregar a este sitio en sus Bookmarks");  
+        }
+      }      
 </script>
 </head>
 <body>
@@ -116,8 +137,12 @@ if($_GET["comprar"]){
 <div id="contenedor">
     
     	<div id="sup">
-            <div id="iconosMenu" style="float:left; margin-left:60px; margin-top: 30px">
-                <a href="index.php"><img src="img/icon-home.png" /> </a>
+            <div id="iconosMenu" style="padding-top:30px; text-align: left; margin-left:60px; margin-top: 30px">
+                <a href="index.php"><img src="img/icon-home.png" /> </a> &nbsp;
+               <a onclick="javascript:bookmarksite();" href="javascript:void(0);">
+                    <img src="img/favoritos.png" height="15px" width="15px" />
+                </a>
+
             </div>
         </div>
         <div id="cos">
