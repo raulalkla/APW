@@ -7,7 +7,9 @@ require_once '../Logica/Usuaris.php';
   $Connexio->connectar();
   $solAmistad = new SolicitudAmistat();
   $usuario = new Usuaris();
-  print_r($_GET);
+  if($_GET['idEliminar']){
+     $solAmistad->setRebutjarSolicitut($_GET['idEliminar']);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,47 +66,55 @@ require_once '../Logica/Usuaris.php';
     </head>
     <body>
         <?php
-        echo"<div id='contPerfil'>";
-        echo "<div id='botonsPerfil' style='margin-top:-5%'><B> 
+        echo "<div id='botonsPerfil'><B> 
             <table border=0 id='tableBotones'>
                 <tr>
                     <td> <a href='dades.php' class='iframes fancybox.iframe' id='misDatos'>Mis datos</a> </td>
-                    <td> <a href='#' id='misCompras'>Historial compras</a> </td>
+                    <td> <a href='compres.php' class='iframes fancybox.iframe' id='misCompras'>Historial compras</a> </td>
                     <td> <a href='#' id='misAmistades'>Mis amistades</a> </td>
                     <td> <a href='preferencies.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td>
                   
                 </tr>
             </B>
-            </div>";
+            </table></div>";
         
         echo "<div id='contenedorPerfil'>";
-        ?>
-         <table border=0 class='hovertable'>
-            <tr>
-                <td><b>Usuario</b></td>
-                <td><b>Fecha</b></td>
-                <td><b>Comentario</b></td>
-                <td><b>Aceptar</b></td>
-                <td><b>Rechazar</b></td>
-            </tr>
-                    
-        <?php
-           
-            $result = $solAmistad->getSolicitutByUser($_SESSION[idUsuario]);
-            for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-            echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-            $resultUsr = $usuario->getUsuariByID(mysql_result($result,$i,1));
-            echo        "<td>".mysql_result($resultUsr,0,1)."</td>";
-            echo        "<td>".mysql_result($result,$i,3)."</td>";
-            echo        "<td style='width:250px'>".mysql_result($result,$i,4)."</td>";
-            echo        "<td style='text-align:center'><a class='idAceptar' href='#' rel='".mysql_result($result,$i,0)."'><img src='img/aceptar.png' height=22px/></a></td>";
-            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,2)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
-            echo    "</tr>";
-                
-            }
-            echo "</div></table></div>";
+ 
+        $result = $solAmistad->getSolicitutByUser($_SESSION[idUsuario]);
+        if(mysql_num_rows($result) > 0 ){
 
+            ?>
+            <table border=0 class='hovertable'>
+                <tr>
+                    <td><b>Usuario</b></td>
+                    <td><b>Fecha</b></td>
+                    <td><b>Comentario</b></td>
+                    <td><b>Aceptar</b></td>
+                    <td><b>Rechazar</b></td>
+                </tr>
+
+            <?php
+
+                for ($i = 0; $i < mysql_num_rows($result); $i++ ){
+                echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
+                $resultUsr = $usuario->getUsuariByID(mysql_result($result,$i,1));
+                echo        "<td>".mysql_result($resultUsr,0,1)."</td>";
+                echo        "<td>".mysql_result($result,$i,3)."</td>";
+                echo        "<td style='width:250px'>".mysql_result($result,$i,4)."</td>";
+                echo        "<td style='text-align:center'><a class='idAceptar' href='#' rel='".mysql_result($result,$i,0)."'><img src='img/aceptar.png' height=22px/></a></td>";
+                echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
+                echo    "</tr>";
+
+                }
+                echo "</div></table>";
+        }else{
+            
+            echo "<p style='margin-left:-200px'><b>No tienes nofiticaciones</b></p>";
+            
+        }
+                
         ?>
+       
          
     </body>
 </html>

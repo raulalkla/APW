@@ -2,6 +2,7 @@
 session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
+require_once '../Logica/SolicitudAmistat.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,8 +41,11 @@ require_once '../Logica/Usuaris.php';
                 @$_SESSION[usuario] = $_POST[usuario];
                 $result = $usuari->getUsuariByName(@$_SESSION[usuario]);
                 @$_SESSION[idUsuario] = mysql_result($result, 0,0);
+                $notificacions = new SolicitudAmistat();
+                $result = $notificacions->getSolicitutByUser($_SESSION[idUsuario]);
+                
                 echo "<p><b>Bienvenido ".@$_POST[usuario]." !</b></p>";
-                echo "<p><b>Tienes 13 notificaciones!</b></p>";
+                echo "<p><b>Tienes ".mysql_num_rows($result)." notificaciones!</b></p>";
                 echo "<meta http-equiv='Refresh' content='1;url=index.php'>";
 
             }else {
