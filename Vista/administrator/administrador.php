@@ -24,43 +24,50 @@ if($_GET[logout] == 1){
         
         <script type="text/javascript">
         $(document).ready(function() {
-        $("#misCompras").click(function(evento){
-            $("#contenedorAdmin").load("altaDestino.php"); 
+            $("#aDestino").click(function(evento){
+                $("#contenedorAdmin").load("altaDestino.php"); 
+            });
+            $("#aAtraccion").click(function(evento){
+                $("#contenedorAdmin").load("altaAtraccion.php"); 
+            });
+            $("#aTipoAtraccion").click(function(evento){
+                $("#contenedorAdmin").load("altaTipoAtraccion.php"); 
             });
         });
         </script>
+        
     </head>
     <body>
         <div id="cap_sup">
             <div id="cont_suscripcion">
-                <h2>Hola <?php echo $_SESSION[usuari] ?>!</h2>
+                <br> Panel de administración <br><br>
                 <a href='?logout=1' style='margin-top:15px'><img src='../img/logout.gif' width=20px; height=20px; /></a>
             </div>
         </div>
         <div id="contenedor">
             <div id="sup">
                 <div id="iconosMenu" style="float:left; margin-left:60px; margin-top: 30px">
-                    <a href="index.php"><img src="../img/icon-home.png" /> </a>
+                    <a href="administrador.php"><img src="../img/icon-home.png" /> </a>
                 </div>
             </div>
             <div id="cos">
                 <div id='botonsPerfil' style="margin-left: 50px">
                     <table border=0 id='tableBotones'>
                     <tr>
-                        <td> <a href='#' class='iframes fancybox.iframe' id='misDatos'>Alta destino</a> </td>
-                        <td> <a href='#' id='misCompras'>Alta atraccion</a> </td>
-                        <td> <a href='#' id='misAmistades'>Alta tipo atraccion</a> </td>
+                        <td> <a href='#' id='aDestino'>Alta destino</a> </td>
+                        <td> <a href='#' id='aAtraccion'>Alta atraccion</a> </td>
+                        <td> <a href='#' id='aTipoAtraccion'>Alta tipo atraccion</a> </td>
                         <!--<td> <a href='#' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td> -->
                     </tr>
                     </table>
                 </div>
                 <div id='contenedorAdmin'>
-                    Aci mostrarem les notificacions...
+                    <h1>Hola <?php echo $_SESSION[usuari] ?>!</h1>
                 </div>
             </div>
             <div id="peu"></div>
         </div>
-</body>
+    </body>
 </html>
         
         
