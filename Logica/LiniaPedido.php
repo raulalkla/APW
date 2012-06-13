@@ -4,7 +4,7 @@
 class LiniaPedido {
     
     public function getLiniesPedido($idHistoric){
-        $sql = "SELECT l.* FROM linies_comenda l, hitoric_compres h WHERE l.id = h.historic_comanda AND h.id = ".$idHistoric;
+        $sql = "SELECT * FROM linies_comanda WHERE id = ".$idHistoric;
         $result = mysql_query($sql);
         return $result;
     }
