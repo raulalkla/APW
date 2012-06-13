@@ -38,7 +38,7 @@ require_once '../Logica/Usuaris.php';
         
             if(@$usuari->autentificarUsuari($_POST[usuario],$_POST[password])){
                 @$_SESSION[usuario] = $_POST[usuario];
-                $result = $usuari->getUsuariByID(@$_SESSION[usuario]);
+                $result = $usuari->getUsuariByName(@$_SESSION[usuario]);
                 @$_SESSION[idUsuario] = mysql_result($result, 0,0);
                 echo "<p><b>Bienvenido ".@$_POST[usuario]." !</b></p>";
                 echo "<p><b>Tienes 13 notificaciones!</b></p>";

@@ -41,7 +41,7 @@ require_once '../Logica/Usuaris.php';
         else{
             
            
-            $result = $usuari->getUsuariByID(@$_SESSION[usuario]);
+            $result = $usuari->getUsuariByName(@$_SESSION[usuario]);
             echo "<p style='text-align:left; font-size:14px'><B>Datos personales:</B></p>";
             echo "<form id='form' method='POST'>";
             echo "<table border=0 style='font-size:12px'>";

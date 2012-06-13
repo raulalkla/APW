@@ -69,7 +69,7 @@ $_SESSION['carro']= @array_values($_SESSION['carro']);
     <body>
         <div id ="divCistella" >
             <form method="GET">
-                <table id="taulaCistella" class="hovertable">
+                <table id="taulaSolAmistad" class="hovertable">
                     <tr>
                     <!--  <td><b>Numero</b></td> -->
                         <td><b>Nombre</b></td>

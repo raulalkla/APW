@@ -7,8 +7,13 @@ class Usuaris {
         $result = mysql_query($sql);
         return $result;
     }
-    public function getUsuariByID($usuari){ // Suposem que la ID es el camp Usuari (Nickname)
+    public function getUsuariByName($usuari){ // Suposem que la ID es el camp Usuari (Nickname)
         $sql = "SELECT * FROM usuaris WHERE usuari = '".$usuari."'";
+        $result = mysql_query($sql);
+        return $result;
+    }    
+    public function getUsuariByID($id){ // Suposem que la ID es el camp Usuari (Nickname)
+        $sql = "SELECT * FROM usuaris WHERE id = '".$id."'";
         $result = mysql_query($sql);
         return $result;
     }    
