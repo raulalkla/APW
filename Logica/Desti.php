@@ -16,19 +16,25 @@ class Desti {
         $result = mysql_query($sql);
         return $result;
     }
-    public function getNomDestiByID($num){
+    public function getIdDesti($num){
+        $sql = "SELECT Id FROM desti";
+        //echo $sql;
+        $result = mysql_query($sql);
+        return mysql_result($result, $num, 0);
+    }
+    public function getNomDesti($num){
         $sql = "SELECT nom FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
         return mysql_result($result, $num, 0);
     }
-    public function getUbicacioByID($num){
+    public function getUbicacio($num){
         $sql = "SELECT ubicacio FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
         return mysql_result($result, $num, 0);
     }
-    public function getEstatByID($num){
+    public function getEstat($num){
         $sql = "SELECT estat FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
@@ -45,6 +51,13 @@ class Desti {
         $result = mysql_query($sql);
         return $result;
     }
+    public function delDesti($id){
+        $sql = "DELETE FROM desti WHERE id = $id";
+        //echo $sql."  ";
+        $result = mysql_query($sql);
+        return $result;
+    }
+    
 
 }
 

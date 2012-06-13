@@ -32,9 +32,9 @@
                      }    
                     });
                 $('a.idEliminar').click(function(){
-                        var txt=$(this).attr("rel");
-                        $("#contenedor_atraccion").load("perfil.php?idEliminar="+txt); 
-                    });      
+                    var txt=$(this).attr("rel");
+                    $("#contenedorAdmin").load("gestionDestino.php?idEliminar="+txt); 
+                });
             });
         </script>
         
@@ -72,6 +72,15 @@
         <?php 
             $desti = new Desti();
             $estat = new Estat();
+            
+            if($_GET['idEliminar']){
+                if($desti->delDesti($_GET['idEliminar'])){
+                    echo "<h2>Destino eliminado!</h2>";
+                }
+                else{
+                    echo "<h2>Error! Destino no eliminado!</h2>";
+                }
+            }
         ?>
             <form id="form" method="POST">
             <table class="hovertable">
@@ -85,19 +94,17 @@
                 <?php
                 for($i = 0; $i < $desti->getNumDestins(); $i++){
                     echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                        echo "<td>".$desti->getNomDestiByID($i)."</td>";
-                        echo "<td>".$desti->getUbicacioByID($i)."</td>";
-                        echo "<td>".$estat->getTipusEstatByID($desti->getEstatByID($i))."</td>";
-                        echo "<td>
-                                <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a>
-                                <img src='../img/drop.png' />
-                            </td>";
+                        echo "<td>".$desti->getNomDesti($i)."</td>";
+                        echo "<td>".$desti->getUbicacio($i)."</td>";
+                        echo "<td>".$estat->getTipusEstatByID($desti->getEstat($i))."</td>";
+                        echo "<td> <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a> </td>";
+                        echo "<td> <a class='idEliminar' href='#' rel='".$desti->getIdDesti($i)."' OnClick=\"return confirm('Segur que vols eliminar?');\"> <img src='../img/drop.png' /> </a> </td>";
                     echo "</tr>";
                 }
                 ?>
             </table>
         </form>
-        <a href='anadirDestino.php' class="iframes fancybox.iframe"> <img src='../img/add.png' height=20px /> </a>
+        <a href='anadirDestino.php' class="iframes fancybox.iframe"> <img src='../img/add.png' height=25px /> </a>
         </div>
     </body>
 </html>
