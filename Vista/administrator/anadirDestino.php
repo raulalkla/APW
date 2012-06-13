@@ -20,6 +20,7 @@
         <?php
             $estat = new Estat();
         ?>
+        <form method="POST">
         <table>
             <tr>
                 <td><b>Nombre</b></td>
@@ -40,5 +41,6 @@
                 <td> <input type="submit" value="Anadir"> </td>
             </tr>
         </table>
+        </form>
     </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once '../../Logica/Connexio.php';
-
+require_once '../../Logica/Desti.php';
+print_r($_POST);
 if(!$_SESSION[usuari]){
     header("Location: index.php");
 }

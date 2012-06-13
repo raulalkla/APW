@@ -27,7 +27,9 @@
                     autoSize	: false,
                     closeClick	: false,
                     openEffect	: 'none',
-                    closeEffect	: 'none'
+                    closeEffect	: 'none',
+                      onClosed: function() { window.location.href = "administrador.php";
+                     }    
                     });
                 $('a.idEliminar').click(function(){
                         var txt=$(this).attr("rel");
