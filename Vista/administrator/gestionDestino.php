@@ -2,16 +2,13 @@
 <?php
     session_start();
     require_once '../../Logica/Connexio.php';
+    require_once '../../Logica/Desti.php';
+    require_once '../../Logica/Estat.php';
     
     $con = new Connexio();
     
     if(!$_SESSION[usuari]){
         header("Location: index.php");
-    }
-    
-    if($_POST[nom]){
-        $sql = "INSERT INTO desti (nom, ubicacio, estat) VALUES (\"$_POST[nombre]\", \"$_POST[ubicacio]\", $_POST[2])";
-        echo $sql;
     }
     
 ?>
@@ -65,12 +62,8 @@
     <body>
         <div id="contenedor">
         <?php 
-            $sql = "SELECT d.nom, d.ubicacio, e.tipus FROM desti d, estat e WHERE e.id = d.estat ";
-            //echo $sql;
-            $result = $con->query($sql);
-            
-            $sql = "Select * FROM estat";
-            $resEstat = $con->query($sql);
+            $desti = new Desti();
+            $estat = new Estat();
         ?>
             <form id="form" method="POST">
             <table class="hovertable">
@@ -78,23 +71,29 @@
                     <td><b>Nombre</b></td>
                     <td><b>Ubicación</b></td>
                     <td><b>Estado</b></td>
+                    <td></td>
                 </tr>
                 <?php
-                for($i = 0; $i < mysql_num_rows($result); $i++){
+                for($i = 0; $i < $desti->getNumDestins(); $i++){
                     echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                        echo "<td>"; echo mysql_result($result, $i, 0); echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 1);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 2);echo "</td>";
+                        echo "<td>".$desti->getNomDestiByID($i)."</td>";
+                        echo "<td>".$desti->getUbicacioByID($i)."</td>";
+                        echo "<td>".$estat->getTipusEstatByID($desti->getEstatByID($i))."</td>";
+                        echo "<td>
+                                <img src='../img/add.png' height=22px />
+                                <img src='../img/.png' height=22px />
+                                <img src='../img/drop.png' height=22px />
+                            </td>";
                     echo "</tr>";
                 }
                 ?>
                 <tr>
-                    <td> <input type="text" name="nombre"> </td>
+                    <td> <input type="text" name="nomDest"> </td>
                     <td> <input type="text" name="ubicacio"> </td>
                     <td> 
-                        <select name="estado"> 
+                        <select name="estat"> 
                             <?php for($j = 0; $j < mysql_num_rows($resEstat); $j++){
-                                        echo "<option id='".mysql_result($resEstat, $j, 0)."'>".mysql_result($resEstat, $j, 1)."</option>";
+                                        echo "<option>".mysql_result($resEstat, $j, 1)."</option>";
                                   } ?>
                         </select>
                     </td>
@@ -106,6 +105,3 @@
     </body>
 </html>
 
-<pre>
-<?php print_r($_POST); ?>
-</pre>

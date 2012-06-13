@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../../Logica/Connexio.php';
 
 if(!$_SESSION[usuari]){
     header("Location: index.php");
@@ -8,6 +9,8 @@ if($_GET[logout] == 1){
     unset($_SESSION);
     header("Location: index.php");
 }
+
+$con = new Connexio();
 
 ?>
 
@@ -25,15 +28,18 @@ if($_GET[logout] == 1){
         <script type="text/javascript">
         $(document).ready(function() {
             $("#aDestino").click(function(evento){
-                $("#contenedorAdmin").load("altaDestino.php"); 
+                $("#contenedorAdmin").load("gestionDestino.php");
             });
             $("#aAtraccion").click(function(evento){
-                $("#contenedorAdmin").load("altaAtraccion.php"); 
+                $("#contenedorAdmin").load("gestionAtraccion.php"); 
             });
             $("#aTipoAtraccion").click(function(evento){
-                $("#contenedorAdmin").load("altaTipoAtraccion.php"); 
+                $("#contenedorAdmin").load("gestionTipoAtraccion.php"); 
             });
         });
+        function mostraAltaDestino(){
+            $("#contenedorAdmin").load("altaDestino.php");
+        }
         </script>
         
     </head>
@@ -54,15 +60,33 @@ if($_GET[logout] == 1){
                 <div id='botonsPerfil' style="margin-left: 50px">
                     <table border=0 id='tableBotones'>
                     <tr>
-                        <td> <a href='#' id='aDestino'>Alta destino</a> </td>
-                        <td> <a href='#' id='aAtraccion'>Alta atraccion</a> </td>
-                        <td> <a href='#' id='aTipoAtraccion'>Alta tipo atraccion</a> </td>
+                        <td> <a href='#' id='aDestino'>Destino</a> </td>
+                        <td> <a href='#' id='aAtraccion'>Atraccion</a> </td>
+                        <td> <a href='#' id='aTipoAtraccion'>Tipo atraccion</a> </td>
                         <!--<td> <a href='#' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td> -->
                     </tr>
                     </table>
                 </div>
                 <div id='contenedorAdmin'>
+                    <?php 
+                    if($_POST){
+                        if($_POST[nomDest]){ // Alta Destino
+                            $desti = new Desti();
+                            if($desti->setDesti($_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
+                                echo "<h2>Destino insertado!</h2>";
+                            }
+                            else{
+                                echo "<h2>Error! Destino no insertado!</h2>";
+                            }
+                        }
+                        else if($_POST[nomAtrac]){ // Alta Atraccion
+                            
+                        }
+                    }
+                    else{
+                    ?>
                     <h1>Hola <?php echo $_SESSION[usuari] ?>!</h1>
+                    <? } ?>
                 </div>
             </div>
             <div id="peu"></div>
@@ -70,4 +94,6 @@ if($_GET[logout] == 1){
     </body>
 </html>
         
-        
+<pre>
+<?php print_r($_POST); ?>
+</pre>
