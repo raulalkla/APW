@@ -55,8 +55,10 @@ if($_GET["comprar"]){
 <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
 
 <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
 <link rel="stylesheet" href="css/estil.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/>
+
 <script type="text/javascript">
 	$(document).ready(function() {
             $(".iframes").fancybox({

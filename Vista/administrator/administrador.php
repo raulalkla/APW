@@ -24,6 +24,7 @@ $con = new Connexio();
         <script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script> 
         <script type="text/javascript" src="../js/jquery.mousewheel-3.0.4.pack.js"></script>
         <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+        <link rel="stylesheet" type="text/css" href="../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
         
         <script type="text/javascript">
         $(document).ready(function() {

@@ -18,16 +18,22 @@
         
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#form").bind("submit", function() {
-                    $.ajax({ 
-                            type    : "POST", 
-                            cache   : false, 
-                            url     : "altaDestino.php", 
-                            data    : $(this).serializeArray()
-                    }); 
-                    return false; 
-                });
-            }
+                $(".iframes").fancybox({
+                    maxWidth	: 800,
+                    maxHeight	: 600,
+                    fitToView	: false,
+                    width		: '70%',
+                    height		: '70%',
+                    autoSize	: false,
+                    closeClick	: false,
+                    openEffect	: 'none',
+                    closeEffect	: 'none'
+                    });
+                $('a.idEliminar').click(function(){
+                        var txt=$(this).attr("rel");
+                        $("#contenedor_atraccion").load("perfil.php?idEliminar="+txt); 
+                    });      
+            });
         </script>
         
         <style type="text/css">
@@ -80,25 +86,13 @@
                         echo "<td>".$desti->getUbicacioByID($i)."</td>";
                         echo "<td>".$estat->getTipusEstatByID($desti->getEstatByID($i))."</td>";
                         echo "<td>
-                                <img src='../img/add.png' height=22px />
-                                <img src='../img/.png' height=22px />
+                                <a href='anadirDestino.php' class='iframes fancybox.iframe'> <img src='../img/add.png' height=22px /> </a>
+                                <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/.png' height=22px /> </a>
                                 <img src='../img/drop.png' height=22px />
                             </td>";
                     echo "</tr>";
                 }
                 ?>
-                <tr>
-                    <td> <input type="text" name="nomDest"> </td>
-                    <td> <input type="text" name="ubicacio"> </td>
-                    <td> 
-                        <select name="estat"> 
-                            <?php for($j = 0; $j < mysql_num_rows($resEstat); $j++){
-                                        echo "<option>".mysql_result($resEstat, $j, 1)."</option>";
-                                  } ?>
-                        </select>
-                    </td>
-                    <td> <input type="submit" value="Anadir"> </td>
-                </tr>
             </table>
         </form>
         </div>
