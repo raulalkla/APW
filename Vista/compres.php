@@ -4,6 +4,7 @@ require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 require_once '../Logica/HistoricCompres.php';
 require_once '../Logica/LiniaPedido.php';
+require_once '../Logica/Atraccions.php';
 
 $Connexio = new Connexio();
 $Connexio->connectar();
@@ -11,7 +12,7 @@ $Connexio->selectdb("socialtravel");
 
 $histCompres = new HistoricCompres();
 $liniaPedido = new LiniaPedido();
-
+$atraccions  = new Atraccions();
 // $idHistCompres = mysql_result($result, 1,2);
 // echo $idHistCompres;
   
@@ -26,7 +27,7 @@ $liniaPedido = new LiniaPedido();
         <?php 
             $result = $histCompres->getHistoricCompres($_SESSION[idUsuario]);
             if(mysql_num_rows($result)>0){
-               echo mysql_result($result,0,1);
+               
         ?>
         <table border=0 class='hovertable'>
                 <tr>
@@ -37,13 +38,13 @@ $liniaPedido = new LiniaPedido();
                 </tr>
                 <?php
                 for($i = 0; $i < mysql_num_rows($result); $i++){
-                    // $resultLiniaPedido = $liniaPedido->getLiniesPedido());
-                    echo mysql_result($resultLiniaPedido, 0,0);
+                    $resultLiniaPedido = $liniaPedido->getLiniesPedido(mysql_result($result,$i,2));
                     echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                        echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,0)."</td>";
-                        echo "<td style='text-align:center'></td>";
-                        echo "<td style='text-align:center'></td>";  
-                        echo "<td style='text-align:center'></td>";
+                        $nomAtraccio = $atraccions->getNomAtraccionByID(mysql_result($resultLiniaPedido, 0,4));
+                        echo "<td style='text-align:center'>".  utf8_encode($nomAtraccio)."</td>";
+                        echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,2)."</td>";
+                        echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,1)."</td>";  
+                        echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,3)."</td>";
                     echo "</tr>";
                 }
                 
