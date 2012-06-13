@@ -6,7 +6,7 @@ if(!$_SESSION[usuari]){
     header("Location: index.php");
 }
 if($_GET[logout] == 1){
-    unset($_SESSION);
+    session_unset();
     header("Location: index.php");
 }
 
