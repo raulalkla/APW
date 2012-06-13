@@ -5,6 +5,7 @@ require_once '../Logica/Usuaris.php';
 require_once '../Logica/Atraccions.php';
 require_once '../Logica/LiniaPedido.php';
 require_once '../Logica/Desti.php';
+require_once '../Logica/TipusAtraccions.php';
 
 
 $Connexio = new Connexio();
@@ -12,7 +13,8 @@ $Connexio->connectar();
 $Connexio->selectdb("socialtravel");
 $atraccions = new Atraccions();
 $desti = new Desti();
-print_r($_POST);
+$tipusAtraccio = new TipusAtraccions();
+
 if(@$_GET[logout])    session_unset();
 if($_GET["idcompra"]){
     $num = sizeof($_SESSION["carro"]);
@@ -147,11 +149,12 @@ if($_GET["comprar"]){
                
                    
                    <form name="form" method="POST" style="display:inline;">
-                        <select onchange="document.form.submit()" name="destino">
+                       Destino: <select onchange="document.form.submit()" name="destino">
                             <?php
+                              
                                $result =  $desti->getDesti();
                                   
-                               if($_POST[destino] == 'todos')  echo "<option selected value='todos'>Todas</option>";
+                               if($_POST[destino] == 'todos')  echo "<option selected value='todos'>Todos</option>";
                                else echo "<option value='todos'>Todas</option>";
                                   
                                   for($i = 0; $i < mysql_num_rows($result); $i++ ){
@@ -161,9 +164,33 @@ if($_GET["comprar"]){
                                     
                                     
                                 }
+                                
+                            ?>
+                        </select>
+                  
+                        Atracción: <select onchange="document.form.submit()" name="tipusAtraccio">
+                            <?php
+                              
+                               $result =  $tipusAtraccio->getTipusAtraccions();
+                                  
+                               if($_POST[tipusAtraccio] == 'todos')  echo "<option selected value='todos'>Todas</option>";
+                               else echo "<option value='todos'>Todas</option>";
+                                  
+                                  for($i = 0; $i < mysql_num_rows($result); $i++ ){
+                                      
+                                    if($_POST[tipusAtraccio] == mysql_result($result,$i,0))     echo "<option selected value='".mysql_result($result,$i,0)."'>".mysql_result($result,$i,1)."</option>";
+                                    else echo "<option value='".mysql_result($result,$i,0)."'>".mysql_result($result,$i,1)."</option>";
+                                    
+                                    
+                                }
+                                
                             ?>
                         </select>
                    </form> 
+                   
+                   
+                   
+                   
                    
                 </div>
                 <div style="float:right; margin-top:-25px">
@@ -199,13 +226,14 @@ if($_GET["comprar"]){
                     }
                    
                     for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                        echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
-                        echo '<div id="atraccion">';
-                        echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
-                        echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                        echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
-                        echo '</div></a>';
-
+                        if($_POST[tipusAtraccio] == mysql_result($result,$i,10) || $_POST[tipusAtraccio] == 'todos' || !$_POST[tipusAtraccio]){
+                            echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
+                            echo '<div id="atraccion">';
+                            echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                            echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
+                            echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
+                            echo '</div></a>';
+                        }
                     }
                 ?>
                 </div>
