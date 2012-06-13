@@ -7,7 +7,7 @@ class Connexio {
     private $pwd;
     private $ip;
     
-    public function __construct($usr,$pwd,$ip='localhost')  				  
+    public function __construct($usr='pau',$pwd='pau',$ip='localhost')  				  
     {
           $this->ip = $ip;
           $this->usr = $usr;

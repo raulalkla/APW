@@ -3,7 +3,7 @@ session_start();
 require_once '../Logica/Connexio.php';
 require_once '../Logica/Preferencies.php';
 require_once '../Logica/TipusAtraccions.php';
-    $Connexio = new Connexio('pau','pau','');
+    $Connexio = new Connexio();
     $Connexio->connectar();
     $Connexio->selectdb("socialtravel");
     $preferencies = new Preferencies();

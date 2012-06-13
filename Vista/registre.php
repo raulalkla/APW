@@ -3,7 +3,7 @@ require_once '../Logica/Connexio.php';
 require_once '../Logica/Usuaris.php';
 
     if($_POST){
-        $Connexio = new Connexio('pau','pau','');
+        $Connexio = new Connexio();
         $Connexio->connectar();
         $Connexio->selectdb("socialtravel");
 
