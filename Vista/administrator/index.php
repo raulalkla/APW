@@ -7,9 +7,11 @@
     </head>
     <body>
         <div id="login">
-            Login
-            
-            
+            <form method='POST'>
+            <input type='text' name='admin' value='Administrador' onFocus="if(this.value=='Administrador') this.value='';"/><br>
+            <input type='password' name='password' value='password' onFocus="if(this.value=='password') this.value='';"/><br>
+            <input type='submit' name='loginAdmin'  />
+            </form>
         </div>
     </body>
 </html>
