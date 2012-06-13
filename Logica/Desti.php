@@ -16,23 +16,23 @@ class Desti {
         $result = mysql_query($sql);
         return $result;
     }
-    public function getNomDestiByID($id){
+    public function getNomDestiByID($num){
         $sql = "SELECT nom FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $id, 0);
+        return mysql_result($result, $num, 0);
     }
-    public function getUbicacioByID($id){
+    public function getUbicacioByID($num){
         $sql = "SELECT ubicacio FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $id, 0);
+        return mysql_result($result, $num, 0);
     }
-    public function getEstatByID($id){
+    public function getEstatByID($num){
         $sql = "SELECT estat FROM desti";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $id, 0);
+        return mysql_result($result, $num, 0);
     }
     public function getNumDestins() {
         $sql = "SELECT count(*) FROM desti";

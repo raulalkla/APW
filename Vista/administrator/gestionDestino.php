@@ -77,7 +77,8 @@
                     <td><b>Nombre</b></td>
                     <td><b>Ubicación</b></td>
                     <td><b>Estado</b></td>
-                    <td></td>
+                    <td><b>Editar</b></td>
+                    <td><b>Eliminar</b></td>
                 </tr>
                 <?php
                 for($i = 0; $i < $desti->getNumDestins(); $i++){
@@ -86,15 +87,15 @@
                         echo "<td>".$desti->getUbicacioByID($i)."</td>";
                         echo "<td>".$estat->getTipusEstatByID($desti->getEstatByID($i))."</td>";
                         echo "<td>
-                                <a href='anadirDestino.php' class='iframes fancybox.iframe'> <img src='../img/add.png' height=22px /> </a>
-                                <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/.png' height=22px /> </a>
-                                <img src='../img/drop.png' height=22px />
+                                <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a>
+                                <img src='../img/drop.png' />
                             </td>";
                     echo "</tr>";
                 }
                 ?>
             </table>
         </form>
+        <a href='anadirDestino.php' class="iframes fancybox.iframe"> <img src='../img/add.png' height=20px /> </a>
         </div>
     </body>
 </html>
