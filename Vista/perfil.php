@@ -71,7 +71,7 @@ require_once '../Logica/Usuaris.php';
                 <tr>
                     <td> <a href='dades.php' class='iframes fancybox.iframe' id='misDatos'>Mis datos</a> </td>
                     <td> <a href='compres.php' class='iframes fancybox.iframe' id='misCompras'>Historial compras</a> </td>
-                    <td> <a href='#' id='misAmistades'>Mis amistades</a> </td>
+                    <td> <a href='amistats.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis amistades</a> </td>
                     <td> <a href='preferencies.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td>
                   
                 </tr>
