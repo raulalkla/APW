@@ -6,10 +6,12 @@ require_once '../../Logica/Connexio.php';
 if($_POST){
     $con = new Connexio();
     $sql = "SELECT * FROM usuaris WHERE usuari = \"$_POST[admin]\" AND password = MD5(\"$_POST[password]\") AND admin = 1";
-    echo $sql;
+//    echo $sql;
     $result = $con->query($sql);
-    if(mysql_num_rows($result) > 0)
-        header("Location: http://www.codigomaestro.com/");
+    if(mysql_num_rows($result) > 0){
+        $_SESSION[usuari] = $_POST[admin];
+        header("Location: administrador.php");
+    }
 }
 
 ?>
@@ -26,6 +28,12 @@ if($_POST){
             <input type='password' name='password' value='password' onFocus="if(this.value=='password') this.value='';"/><br>
             <input type='submit' name='loginAdmin'  />
             </form>
+            <?php if($_POST && mysql_num_rows($result) == 0){
+                        echo "<p class='error'>";
+                        echo "Usuario/Contraseña incorrecta!"; 
+                        echo "</p>";
+                  }
+            ?>
         </div>
     </body>
 </html>

@@ -12,6 +12,9 @@ class Connexio {
           $this->ip = $ip;
           $this->usr = $usr;
           $this->pwd = $pwd;
+          
+          $this->connectar();
+          $this->selectdb("socialtravel");
     }
     
     // Realitzem la connexio a la base de dades
