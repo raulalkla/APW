@@ -46,12 +46,12 @@ class Atraccions {
     public function getNom($num) {
         $sql = "SELECT nom FROM atraccio";
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 0));
+        return mysql_result($result, $num, 0);
     }
     public function getDescripcio($num) {
         $sql = "SELECT id, descripcio FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 1));
+        return mysql_result($result, $num, 1);
     }
     public function getDurada($num) {
         $sql = "SELECT id, durada FROM atraccio ORDER BY 1";
@@ -121,8 +121,8 @@ class Atraccions {
         return $result;
     }
     public function insert($nom, $descr, $durada, $preu, $estat, $desti, $promocio, $tipusAtraccio, $imatge) {
-        $sql = utf8_encode("INSERT INTO `atraccio`(`nom`, `descripcio`, `durada`, `preu`, `estat`, `desti`, `promocio`, `tipus_atraccio`, `imatge`) VALUES (\"$nom\", \"".utf8_encode ($descr)."\", $durada, $preu, (SELECT id FROM estat WHERE tipus = \"$estat\"), (SELECT id FROM desti WHERE nom = \"$desti\"), (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\"), $imatge)");
-        //echo $sql;
+        $sql = "INSERT INTO `atraccio`(`nom`, `descripcio`, `durada`, `preu`, `estat`, `desti`, `promocio`, `tipus_atraccio`, `imatge`) VALUES (\"$nom\", \"$descr\", $durada, $preu, (SELECT id FROM estat WHERE tipus = \"$estat\"), (SELECT id FROM desti WHERE nom = \"$desti\"), (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\"), $imatge)";
+        echo $sql;
         $result = mysql_query($sql);
         return $result;
     }

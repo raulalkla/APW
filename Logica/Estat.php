@@ -27,10 +27,10 @@ class Estat {
         return mysql_result($result, 0);
     }
     public function getTipusEstat($num){
-        $sql = "SELECT tipus FROM estat";
+        $sql = "SELECT id, tipus FROM estat ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getNumEstats() {
         $sql = "SELECT count(*) FROM estat";

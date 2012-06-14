@@ -84,7 +84,7 @@ require_once '../Logica/Usuaris.php';
             if(mysql_result($result,$i,1) == $_SESSION[idUsuario]) $idUsuario = mysql_result($result,$i,2);
             else $idUsuario = mysql_result($result,$i,1);
             $resultNombre = $usuario->getUsuariByID($idUsuario);
-            echo        "<td>".  utf8_encode(mysql_result($resultNombre,0,1))." ".  utf8_encode(mysql_result($resultNombre,0,2))."</td>";
+            echo        "<td>".mysql_result($resultNombre,0,1)." ".mysql_result($resultNombre,0,2)."</td>";
             echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
             echo    "</tr>";
         }

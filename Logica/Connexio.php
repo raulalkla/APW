@@ -1,4 +1,3 @@
-<meta content="text/html; charset=utf8" http-equiv=Content-Type>
 <?php
 
 class Connexio {
@@ -19,7 +18,7 @@ class Connexio {
     
     // Realitzem la connexio a la base de dades
     function connectar(){
-        if( mysql_connect($this->ip,$this->usr,$this->pwd) ) return true;
+        if( mysql_set_charset('utf8', mysql_connect($this->ip,$this->usr,$this->pwd)) ) return true;
 	  return false;    
     }
     // Seleccionem la Base de dades

@@ -84,9 +84,9 @@ $desti = new Desti();
                                 echo "<td>";
                                 echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
-                                echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                                echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.mysql_result($result,$i,1).'</b></div>';
                           //      echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                          //      echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
+                          //      echo '	<div id="descripcion_atraccion">'.substr(mysql_result($result,$i,2),0,90).'..."</div> ';         
                                 echo '</div></a></td>';
 
                             }
@@ -137,9 +137,9 @@ $desti = new Desti();
                                 echo "<td>";
                                 echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
-                                echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                                echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.mysql_result($result,$i,1).'</b></div>';
                           //      echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                          //      echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
+                          //      echo '	<div id="descripcion_atraccion">'.substr(mysql_result($result,$i,2),0,90).'..."</div> ';         
                                 echo '</div></a></td>';
 
                             }

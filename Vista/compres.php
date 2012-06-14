@@ -41,7 +41,7 @@ $atraccions  = new Atraccions();
                     $resultLiniaPedido = $liniaPedido->getLiniesPedido(mysql_result($result,$i,2));
                     echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
                         $nomAtraccio = $atraccions->getNomAtraccionByID(mysql_result($resultLiniaPedido, 0,4));
-                        echo "<td style='text-align:center'>".  utf8_encode($nomAtraccio)."</td>";
+                        echo "<td style='text-align:center'>".$nomAtraccio."</td>";
                         echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,2)."</td>";
                         echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,1)."</td>";  
                         echo "<td style='text-align:center'>".mysql_result($resultLiniaPedido, 0,3)."</td>";

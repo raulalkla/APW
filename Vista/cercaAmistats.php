@@ -80,7 +80,7 @@ $usuario = new Usuaris();
                 echo    "</tr>";
                 for ($i = 0; $i < mysql_num_rows($result); $i++ ){
                     echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                    echo        "<td>".  utf8_encode(mysql_result($result,$i,1))." ".utf8_encode(mysql_result($result,$i,2))."</td>";
+                    echo        "<td>".mysql_result($result,$i,1)." ".mysql_result($result,$i,2)."</td>";
                     echo        "<td style='text-align:center'><a class='idComentario' href='#' rel='".mysql_result($result,$i,0)."'><img src='img/sobre.gif'/></a></td>";
                     echo    "</tr>";
                 }
