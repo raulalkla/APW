@@ -78,24 +78,28 @@ $preferencies = new Preferencies();
                       echo "<h2> Recomendación por destinos: </h2>";
                       echo "<hr>";
                       echo "<table>";
+                      $numAtr = 0;
                       for($x = 0; $x< sizeof($destinos);$x++) {
                           
                         echo "<tr><td><B><p style='font-size:12px'>".$desti->getNomByID($destinos[$x]).":</p></B></td><td></td></tr>";
                         $result = $atraccions->getAtraccionByDesti($destinos[$x]);
                         for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                               
-                                if( ($i%2) ==  0 ) echo "<tr></tr>";
-                                echo "<td>";
-                                echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
+                                $numAtr++;
+                                
+                                if( ($x%2) ==  0 ) echo "<tr>";
+                                
+                                echo '<td><a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
                                 echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.mysql_result($result,$i,1).'</b></div>';
                           //      echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
                           //      echo '	<div id="descripcion_atraccion">'.substr(mysql_result($result,$i,2),0,90).'..."</div> ';         
                                 echo '</div></a></td>';
+                                if( ($x%2) ==  0 ) echo "</tr>";
 
                             }
                         }
                       echo "</table>";
+                      if($numAtr == 0 ) echo "<p>Actualmente no te podemos recomendar ningún destino </p>";
                       
                       
                       
@@ -129,16 +133,16 @@ $preferencies = new Preferencies();
                       
                       echo "<h2> Mis amigos han comprado:  </h2>";
                       echo "<hr>";
-                      echo "<table>";
-                       
+                 
+                      $numAtr = 0;
+                     
                       for($x = 0; $x< sizeof($atraccionesAmigos);$x++) {
                           
-                        echo "<tr>";
-                         $result = $atraccions->getAtraccionByID($atraccionesAmigos[$x]);
+                       
+                        $result = $atraccions->getAtraccionByID($atraccionesAmigos[$x]);
                         for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                               echo "<td>";
-                                if( ($i%2) ==  0 ) echo "</tr>";
-                              
+                               
+                               $numAtr++;
                                 echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
                                 echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.mysql_result($result,$i,1).'</b></div>';
@@ -148,15 +152,28 @@ $preferencies = new Preferencies();
 
                             }
                         }
-                      echo "</table>";
-                      
-                 
-                  
-                        
-              
-                        
-                        
-                        
+                      if($numAtr == 0 ) echo "<p> Actualmente tus amigos no han comprado ninguna atracción</p>";
+                      echo "<br><br><br><br><br><br>&nbsp;";
+                      echo "<h2> Sabemos que esto te gustará:  </h2>";
+                      echo "<hr>";
+                      $numAtr = 0;
+                      $result = $preferencies->getPreferenciesUsuari($_SESSION[idUsuario]);
+                      for($x = 0; $x< mysql_num_rows($result);$x++) {
+                          
+                        $resultAtr = $atraccions->getAtraccionByTipo(mysql_result($result,$x,2));
+                        for ($i = 0; $i < mysql_num_rows($resultAtr); $i++ ){
+                               
+                                $numAtr++;
+                                echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($resultAtr,$i,0).'">';
+                                echo '<div id="atraccion" style="height:5px;">';
+                                echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.mysql_result($resultAtr,$i,1).'</b></div>';
+                          //      echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
+                          //      echo '	<div id="descripcion_atraccion">'.substr(mysql_result($result,$i,2),0,90).'..."</div> ';         
+                                echo '</div></a></td>';
+
+                            }
+                        }
+                        if($numAtr == 0) echo "<p> Actualmente no te podemos recomendar ninguna atracción </p>";
                         
                   ?>
     </body>

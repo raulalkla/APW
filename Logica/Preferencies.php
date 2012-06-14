@@ -7,8 +7,7 @@ class Preferencies {
         $result = mysql_query($sql);
         return $result;
     }
-    public function getNomPrefByID($idPreferencia){
-               
+    public function getNomPrefByID($idPreferencia){      
         $sql = "SELECT nom FROM tipus_atraccio WHERE id = ".$idPreferencia;
         $result = mysql_query($sql);
         return $result;
@@ -26,5 +25,4 @@ class Preferencies {
         return $result;
     }
 }
-
 ?>
