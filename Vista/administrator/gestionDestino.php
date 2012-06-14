@@ -10,7 +10,6 @@
     if(!$_SESSION[usuari]){
         header("Location: index.php");
     }
-    
 ?>
 <html>
     <head>
@@ -28,9 +27,8 @@
                     closeClick	: false,
                     openEffect	: 'none',
                     closeEffect	: 'none',
-                      onClosed: function() { window.location.href = "administrador.php";
-                     }    
-                    });
+                    onClosed: function() { window.location.href = "administrador.php"; }
+                });
                 $('a.idEliminar').click(function(){
                     var txt=$(this).attr("rel");
                     $("#contenedorAdmin").load("gestionDestino.php?idEliminar="+txt); 
@@ -97,7 +95,7 @@
                         echo "<td>".$desti->getNomDesti($i)."</td>";
                         echo "<td>".$desti->getUbicacio($i)."</td>";
                         echo "<td>".$estat->getTipusEstatByID($desti->getEstat($i))."</td>";
-                        echo "<td> <a href='modificarDestino.php' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a> </td>";
+                        echo "<td> <a href='modificarDestino.php?id=$i' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a> </td>";
                         echo "<td> <a class='idEliminar' href='#' rel='".$desti->getIdDesti($i)."' OnClick=\"return confirm('Segur que vols eliminar?');\"> <img src='../img/drop.png' /> </a> </td>";
                     echo "</tr>";
                 }

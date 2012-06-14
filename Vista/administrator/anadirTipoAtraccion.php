@@ -2,7 +2,7 @@
 <?php
     session_start();
     require_once '../../Logica/Connexio.php';
-    require_once '../../Logica/Desti.php';
+    require_once '../../Logica/TipusAtraccions.php';
     require_once '../../Logica/Estat.php';
     
     $con = new Connexio();
@@ -24,21 +24,21 @@
         <table>
             <tr>
                 <td><b>Nombre</b></td>
-                <td><b>Ubicación</b></td>
+                <td><b>Descripción</b></td>
                 <td><b>Estado</b></td>
                 <td></td>
             </tr>
             <tr>
-                <td> <input type="text" name="nomDest"> </td>
-                <td> <input type="text" name="ubicacio"> </td>
+                <td> <input type="text" name="nomTAtrac"> </td>
+                <td> <textarea name="descripcioTAtrac"></textarea> </td>
                 <td> 
-                    <select name="estat"> 
+                    <select name="estatTAtrac"> 
                         <?php for($j = 0; $j < $estat->getNumEstats(); $j++){
                                     echo "<option>".$estat->getTipusEstat($j)."</option>";
                             } ?>
                     </select>
                 </td>
-                <td> <input type="submit" name="anadirDesti" value="Anadir"> </td>
+                <td> <input type="submit" name="anadirTAtrac" value="Anadir"> </td>
             </tr>
         </table>
         </form>

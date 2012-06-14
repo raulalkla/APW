@@ -57,7 +57,12 @@ class Desti {
         $result = mysql_query($sql);
         return $result;
     }
-    
+    public function modifDesti($id, $nom, $ubicacio, $nomEstat){
+        $sql = "UPDATE desti SET nom = \"$nom\", ubicacio = \"$ubicacio\", estat = (SELECT id FROM estat WHERE tipus = \"$nomEstat\") WHERE id = $id";
+        //echo $sql."  ";
+        $result = mysql_query($sql);
+        return $result;
+    }
 
 }
 
