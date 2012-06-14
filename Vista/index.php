@@ -173,10 +173,17 @@ if($_GET["comprar"]){
 			</div>
 		</div>
                 <div id="contenedor_atraccion">
+                <?php 
+                 
+                  if($_GET[recomendaciones]){
+                      echo "<br><p style='float:left; font-size:15px'>Destinos:</p>";
+                  }else{
                 
+                
+                ?>
                 <div style="">
                     
-                    <p style="display:inline; font-size: 15px; margin-right: 6%"><B>¡Ver recomendaciones!</B></p> 
+                    <p style="display:inline; font-size: 15px; margin-right: 6%"><B><a href="?recomendaciones=1" style="display:inline">¡Ver recomendaciones!</a></B></p> 
                   
                     
                    
@@ -225,14 +232,12 @@ if($_GET["comprar"]){
                    
                    
                 </div>
-                    
-                    
-                    
                 <?php
+                
                     if(!$_POST[destino] || $_POST[destino] == "todos"){
-                      $result = $atraccions->getAtraccions();
+                       $result = $atraccions->getAtraccions();
                     }else{
-                      $result = $atraccions->getAtraccionByDesti($_POST[destino]);
+                       $result = $atraccions->getAtraccionByDesti($_POST[destino]);
                     }
                    $numAtracciones = 0; // Contem les atraccions que mostrem
                     for ($i = 0; $i < mysql_num_rows($result); $i++ ){
@@ -247,7 +252,7 @@ if($_GET["comprar"]){
                         }
                     }
                     if($numAtracciones == 0) echo "<p style='float:left'><br><B>&nbsp;&nbsp; - No hay atracciones para tu búsqueda!</B></p>";
-                ?>
+                  }?>
                 </div>
         </div>
         <div id="peu"></div>
@@ -257,5 +262,5 @@ if($_GET["comprar"]){
 
 <?php
     echo "<pre>";
-    print_r($_SESSION);
+    print_r($_GET);
 ?>
