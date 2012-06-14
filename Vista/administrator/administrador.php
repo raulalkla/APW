@@ -4,6 +4,7 @@ require_once '../../Logica/Connexio.php';
 require_once '../../Logica/Desti.php';
 require_once '../../Logica/TipusAtraccions.php';
 require_once '../../Logica/Atraccions.php';
+require_once '../../Logica/LiniaPedido.php';
 
 if(!$_SESSION[usuari]){
     header("Location: index.php");
@@ -15,6 +16,9 @@ if($_GET[logout] == 1){
 
 $con = new Connexio();
 
+$lComanda = new LiniaPedido();
+$atraccio = new Atraccions();
+
 ?>
 
 <html>
@@ -23,6 +27,31 @@ $con = new Connexio();
         <title>Social Travel</title>
         <link rel="stylesheet" href="../css/estil.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8"/>
+        
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                ['Atraccion', 'Num. Ventas'],
+                <?php 
+                for($i = 0; $i < $lComanda->getNumVentasDiarias(); $i++){
+                    echo "['".$atraccio->getNomAtraccionByID($lComanda->getIdAtraccioVentasDiarias($i))."', ".$lComanda->getCantitatVentasDiarias($i)." ]";
+                    if($i < $lComanda->getNumVentasDiarias()) echo ",";
+                }
+                ?>
+                ]);
+
+                var options = {
+                hAxis: {title: 'Atraccion', titleTextStyle: {color: 'red'}}
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
         
         <script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script> 
         <script type="text/javascript" src="../js/jquery.mousewheel-3.0.4.pack.js"></script>
@@ -39,6 +68,9 @@ $con = new Connexio();
             });
             $("#aTipoAtraccion").click(function(evento){
                 $("#contenedorAdmin").load("gestionTipoAtraccion.php"); 
+            });
+            $("#aEstadisticas").click(function(evento){
+                $("#contenedorAdmin").load("estadisticas.php"); 
             });
         });
         function mostraAltaDestino(){
@@ -145,7 +177,8 @@ $con = new Connexio();
                     }
                     else{
                     ?>
-                    <h1>Hola <?php echo $_SESSION[usuari] ?>!</h1>
+                    <h2>Ventas diarias</h2><hr style="margin: auto 10% auto 10%">
+                    <div id="chart_div" style="width: 800px; height: 400px; margin: auto 10% auto auto"></div>
                     <? } ?>
                 </div>
             </div>

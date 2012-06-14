@@ -9,6 +9,22 @@ class LiniaPedido {
         return $result;
     }
     
+    public function getCantitatVentasDiarias($num) {
+        $sql = "SELECT cantitat, atraccio FROM  `linies_comanda` WHERE DATE(  `data` ) = DATE( NOW( ) ) ";
+        $result = mysql_query($sql);
+        return mysql_result($result, $num, 0);
+    }
+    public function getIdAtraccioVentasDiarias($num) {
+        $sql = "SELECT cantitat, atraccio FROM  `linies_comanda` WHERE DATE(  `data` ) = DATE( NOW( ) ) ";
+        $result = mysql_query($sql);
+        return mysql_result($result, $num, 1);
+    }
+    public function getNumVentasDiarias() {
+        $sql = "SELECT Count(*) FROM  `linies_comanda` WHERE DATE(  `data` ) = DATE( NOW( ) ) ";
+        $result = mysql_query($sql);
+        return mysql_result($result, 0);
+    }
+
     public function getLiniaPedidoById($idHistoric, $id){
         $sql = "SELECT l.* FROM linies_comenda l, hitoric_compres h WHERE l.id = h.historic_comanda AND h.id = ".$idHistoric." AND l.id = ".$id;
         $result = mysql_query($sql);
