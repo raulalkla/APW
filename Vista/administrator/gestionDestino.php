@@ -80,7 +80,7 @@
                 }
             }
         ?>
-            <form id="form" method="POST">
+        <form id="form" method="POST">
             <table class="hovertable">
                 <tr>
                     <td><b>Nombre</b></td>

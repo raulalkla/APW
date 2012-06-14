@@ -31,7 +31,7 @@ if($_GET["idcompra"]){
     }
     
     if($nuevaCompra){
-        $carro[$num]["preu"] = $atraccions->getPreu($_GET["idcompra"]);
+        $carro[$num]["preu"] = $atraccions->getPreuByID($_GET["idcompra"]);
         $carro[$num]["quantitat"] = 1;
         $carro[$num]["idAtraccio"] = $_GET["idcompra"];
         $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
