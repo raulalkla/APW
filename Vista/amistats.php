@@ -85,7 +85,7 @@ require_once '../Logica/Usuaris.php';
             else $idUsuario = mysql_result($result,$i,1);
             $resultNombre = $usuario->getUsuariByID($idUsuario);
             echo        "<td>".mysql_result($resultNombre,0,1)." ".mysql_result($resultNombre,0,2)."</td>";
-            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
+            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Seguro que quieres eliminar?');\"><img src='img/drop.png'/></a></td>";
             echo    "</tr>";
         }
         echo "</table>";

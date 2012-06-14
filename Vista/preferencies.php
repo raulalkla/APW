@@ -101,7 +101,7 @@ require_once '../Logica/TipusAtraccions.php';
             echo    "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
             $resultPreferencias = $preferencies->getNomPrefByID(mysql_result($result,$i,2));
             echo        "<td>".mysql_result($resultPreferencias,0,0)."</td>";
-            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,2)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
+            echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,2)."' OnClick=\"return confirm('Seguro que quieres eliminar?');\"><img src='img/drop.png'/></a></td>";
             echo    "</tr>";
         }
         echo "</table>";

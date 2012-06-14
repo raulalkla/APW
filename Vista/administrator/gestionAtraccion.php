@@ -115,7 +115,7 @@
                         echo "<td> ".@$promocio->getDescripcioByID($atraccio->getIdPromocio($i))."</td>";
                         echo "<td>".$tAtrac->getNomByID($atraccio->getIdTipusAtraccio($i))."</td>";
                         echo "<td> <a href='modificarAtraccion.php?id=$i' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a> </td>";
-                        echo "<td> <a class='idEliminar' href='#' rel='".$atraccio->getIdAtraccio($i)."' OnClick=\"return confirm('Segur que vols eliminar?');\"> <img src='../img/drop.png' /> </a> </td>";
+                        echo "<td> <a class='idEliminar' href='#' rel='".$atraccio->getIdAtraccio($i)."' OnClick=\"return confirm('Seguro que quieres eliminar?');\"> <img src='../img/drop.png' /> </a> </td>";
                     echo "</tr>";
                 }
                 ?>
