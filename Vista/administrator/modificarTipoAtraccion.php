@@ -25,7 +25,7 @@
         <table>
             <tr>
                 <td><b>Nombre</b></td>
-                <td><b>Ubicación</b></td>
+                <td><b>Descripción</b></td>
                 <td><b>Estado</b></td>
                 <td></td>
             </tr>

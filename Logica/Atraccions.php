@@ -122,7 +122,7 @@ class Atraccions {
     }
     public function insert($nom, $descr, $durada, $preu, $estat, $desti, $promocio, $tipusAtraccio, $imatge) {
         $sql = "INSERT INTO `atraccio`(`nom`, `descripcio`, `durada`, `preu`, `estat`, `desti`, `promocio`, `tipus_atraccio`, `imatge`) VALUES (\"$nom\", \"$descr\", $durada, $preu, (SELECT id FROM estat WHERE tipus = \"$estat\"), (SELECT id FROM desti WHERE nom = \"$desti\"), (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\"), $imatge)";
-        echo $sql;
+        //echo $sql;
         $result = mysql_query($sql);
         return $result;
     }

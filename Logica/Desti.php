@@ -64,7 +64,7 @@ class Desti {
     }
     public function setDesti($nom, $ubicacio, $nomEstat){
         $sql = "INSERT INTO desti (nom, ubicacio, estat) VALUES (\"$nom\", \"$ubicacio\", (SELECT id FROM estat WHERE tipus = \"$nomEstat\") )";
-        echo $sql."  ";
+        //echo $sql."  ";
         $result = mysql_query($sql);
         return $result;
     }
