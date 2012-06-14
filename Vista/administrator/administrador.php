@@ -2,6 +2,7 @@
 session_start();
 require_once '../../Logica/Connexio.php';
 require_once '../../Logica/Desti.php';
+require_once '../../Logica/TipusAtraccions.php';
 
 if(!$_SESSION[usuari]){
     header("Location: index.php");
@@ -84,14 +85,25 @@ $con = new Connexio();
                         else if($_POST[modifDesti]){ // Modificar Destino
                             $desti = new Desti();
                             if($desti->modifDesti($_POST[idDest],$_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
-                                echo "<h2>Destino insertado!</h2>";
+                                echo "<h2>Destino modificado!</h2>";
                             }
                             else{
-                                echo "<h2>Error! Destino no insertado!</h2>";
+                                echo "<h2>Error! Destino no modificado!</h2>";
                             }
                         }
-                        else if($_POST[nomAtrac]){ // Alta Atraccion
-                            
+                        else if($_POST[anadirTAtrac]){ // Alta Tipus Atraccion
+                            $tAtrac = new TipusAtraccions();
+                            if($tAtrac->setTipusAtraccions($_POST[nomTAtrac], $_POST[descripcioTAtrac], $_POST[estatTAtrac]))
+                                  echo "<h2>Tipo de atraccion insertado!</h2>";
+                            else
+                                echo "<h2>Error! Tipo de atraccion no insertado!</h2>";
+                        }
+                        else if($_POST[modifTAtrac]){
+                            $tAtrac = new TipusAtraccions();
+                            if($tAtrac->modifTipusAtraccions($_POST[idTAtrac], $_POST[nomTAtrac], $_POST[ubicacioTAtrac], $_POST[estatTAtrac]))
+                                echo "<h2>Tipo de atraccion modificado!</h2>";
+                            else
+                                echo "<h2>Error! Tipo de atraccion no modificado!</h2>";
                         }
                     }
                     else{

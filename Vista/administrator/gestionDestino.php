@@ -10,7 +10,6 @@
     if(!$_SESSION[usuari]){
         header("Location: index.php");
     }
-    
 ?>
 <html>
     <head>
