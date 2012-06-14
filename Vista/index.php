@@ -165,7 +165,7 @@ if($_GET["comprar"]){
 				<?php 
                                         echo "<p><b>Últimos anuncios:</b></p>";
                                         $result = $atraccions->getAtraccionsUltimes();
-					for($x = 0; $x < 5; $x++){			
+					for($x = 0; $x < 5 && mysql_num_rows($result) > $x; $x++){			
                                             echo "<div id='recomendacion'>".utf8_encode(substr(mysql_result($result,$x,1),0,20))."...</div>";
 					} 
 				?>
