@@ -178,8 +178,11 @@ if($_GET["comprar"]){
                 <div id="contenedor_atraccion">
                
                 <div style="">
-                   <p style="display:inline; font-size: 15px; margin-right: 6%"><B><a href='#' id='recomanacions' style="display:inline">¡Ver recomendaciones!</a></B></p> 
                   
+                   <?php 
+                   if($_SESSION[idUsuario])
+                   echo '<p style="display:inline; font-size: 15px; margin-right: 6%"><B><a href="#" id="recomanacions" style="display:inline">¡Ver recomendaciones!</a></B></p>';
+                   ?>
                    <form name="form" method="POST" style="display:inline;">
                        Destino: <select onchange="document.form.submit()" name="destino">
                             <?php

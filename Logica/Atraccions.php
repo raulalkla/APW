@@ -26,6 +26,11 @@ class Atraccions {
         $result = mysql_query($sql);
         return $result;
     }
+    public function getAtraccionByTipo($id){
+        $sql = "SELECT * FROM atraccio WHERE tipus_atraccio = ".$id;
+        $result = mysql_query($sql);
+        return $result;
+    }
     public function getNomAtraccionByID($id){
         $sql = "SELECT nom FROM atraccio WHERE id = ".$id;
         $result = mysql_query($sql);

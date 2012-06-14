@@ -6,13 +6,14 @@ require_once '../Logica/Atraccions.php';
 require_once '../Logica/LiniaPedido.php';
 require_once '../Logica/SolicitudAmistat.php';
 require_once '../Logica/Desti.php';
-require_once '../Logica/TipusAtraccions.php';
+require_once '../Logica/Preferencies.php';
 
 $Connexio = new Connexio();
 $Connexio->connectar();
 $atraccions = new Atraccions();
 $amistat = new SolicitudAmistat();
 $desti = new Desti();
+$preferencies = new Preferencies();
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,12 +76,15 @@ $desti = new Desti();
                       //   for($y = 0 ; $y < sizeof($destinos);$y++)
                       //          echo "Destinos: ".$destinos[$y];
                       echo "<h2> Recomendación por destinos: </h2>";
+                      echo "<hr>";
                       echo "<table>";
                       for($x = 0; $x< sizeof($destinos);$x++) {
                           
-                        echo "<tr><td><B><p style='font-size:12px'>".$desti->getNomByID($destinos[$x]).":</p></B></td></tr>";
+                        echo "<tr><td><B><p style='font-size:12px'>".$desti->getNomByID($destinos[$x]).":</p></B></td><td></td></tr>";
                         $result = $atraccions->getAtraccionByDesti($destinos[$x]);
                         for ($i = 0; $i < mysql_num_rows($result); $i++ ){
+                               
+                                if( ($i%2) ==  0 ) echo "<tr></tr>";
                                 echo "<td>";
                                 echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
@@ -123,18 +127,18 @@ $desti = new Desti();
                           }
                       }
                       
-                      
-                      
-                      
-                      
-                   echo "<h2> Mis amigos han comprado: </h2>";
-                   echo "<table>";
+                      echo "<h2> Mis amigos han comprado:  </h2>";
+                      echo "<hr>";
+                      echo "<table>";
+                       
                       for($x = 0; $x< sizeof($atraccionesAmigos);$x++) {
                           
-                        echo "<tr><td></td></tr>";
-                        $result = $atraccions->getAtraccionByID($atraccionesAmigos[$x]);
+                        echo "<tr>";
+                         $result = $atraccions->getAtraccionByID($atraccionesAmigos[$x]);
                         for ($i = 0; $i < mysql_num_rows($result); $i++ ){
-                                echo "<td>";
+                               echo "<td>";
+                                if( ($i%2) ==  0 ) echo "</tr>";
+                              
                                 echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                                 echo '<div id="atraccion" style="height:5px;">';
                                 echo '  <div id="titulo_atraccion" style="font-size:11px; padding-top:5px"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
@@ -145,6 +149,15 @@ $desti = new Desti();
                             }
                         }
                       echo "</table>";
+                      
+                 
+                  
+                        
+              
+                        
+                        
+                        
+                        
                   ?>
     </body>
 </html>
