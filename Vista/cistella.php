@@ -73,8 +73,8 @@ $_SESSION['carro']= @array_values($_SESSION['carro']);
                     <tr>
                     <!--  <td><b>Numero</b></td> -->
                         <td><b>Nombre</b></td>
-                        <td><b>Cantidad</b></td>
                         <td><b>Importe</b></td>
+                        <td><b>Cantidad</b></td>
                         <td><b>Borrar</b></td>
                     </tr>
                     <?php
