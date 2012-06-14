@@ -38,7 +38,7 @@
                             } ?>
                     </select>
                 </td>
-                <td> <input type="submit" value="Anadir"> </td>
+                <td> <input type="submit" name="anadirDesti" value="Anadir"> </td>
             </tr>
         </table>
         </form>

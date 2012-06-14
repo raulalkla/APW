@@ -72,9 +72,18 @@ $con = new Connexio();
                 <div id='contenedorAdmin'>
                     <?php 
                     if($_POST){
-                        if($_POST[nomDest]){ // Alta Destino
+                        if($_POST[anadirDesti]){ // Alta Destino
                             $desti = new Desti();
                             if($desti->setDesti($_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
+                                echo "<h2>Destino insertado!</h2>";
+                            }
+                            else{
+                                echo "<h2>Error! Destino no insertado!</h2>";
+                            }
+                        }
+                        else if($_POST[modifDesti]){ // Modificar Destino
+                            $desti = new Desti();
+                            if($desti->modifDesti($_POST[idDest],$_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
                                 echo "<h2>Destino insertado!</h2>";
                             }
                             else{
