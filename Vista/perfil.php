@@ -10,6 +10,9 @@ require_once '../Logica/Usuaris.php';
   if($_GET['idEliminar']){
      $solAmistad->setRebutjarSolicitut($_GET['idEliminar']);
   }
+  if($_GET['idAceptar']){
+      $solAmistad->setAcceptarSolicitut($_GET['idAceptar']);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,10 +32,15 @@ require_once '../Logica/Usuaris.php';
                     openEffect	: 'none',
                     closeEffect	: 'none'
                     });
+               
                 $('a.idEliminar').click(function(){
                         var txt=$(this).attr("rel");
                         $("#contenedor_atraccion").load("perfil.php?idEliminar="+txt); 
-                    });      
+                    });     
+                $('a.idAceptar').click(function(){
+                     var txt=$(this).attr("rel");
+                $("#contenedor_atraccion").load("perfil.php?idAceptar="+txt); 
+            });     
             });
     </script>
       <style type="text/css">
@@ -73,6 +81,7 @@ require_once '../Logica/Usuaris.php';
                     <td> <a href='compres.php' class='iframes fancybox.iframe' id='misCompras'>Historial compras</a> </td>
                     <td> <a href='amistats.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis amistades</a> </td>
                     <td> <a href='preferencies.php' class='iframes fancybox.iframe' id='misPreferencias'>Mis preferencias</a> </td>
+                    <td> <a href='cercaAmistats.php' class='iframes fancybox.iframe' id='cercaAmistats'>Buscar amistades</a> </td>
                   
                 </tr>
             </B>
@@ -102,7 +111,7 @@ require_once '../Logica/Usuaris.php';
                 echo        "<td>".mysql_result($result,$i,3)."</td>";
                 echo        "<td style='width:250px'>".mysql_result($result,$i,4)."</td>";
                 echo        "<td style='text-align:center'><a class='idAceptar' href='#' rel='".mysql_result($result,$i,0)."'><img src='img/aceptar.png' height=22px/></a></td>";
-                echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Segur que vols eliminar?');\"><img src='img/drop.png'/></a></td>";
+                echo        "<td style='text-align:center'><a class='idEliminar' href='#' rel='".mysql_result($result,$i,0)."' OnClick=\"return confirm('Seguro que quieres rechazarla?');\"><img src='img/drop.png'/></a></td>";
                 echo    "</tr>";
 
                 }

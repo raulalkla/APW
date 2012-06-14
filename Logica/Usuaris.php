@@ -12,6 +12,15 @@ class Usuaris {
         $result = mysql_query($sql);
         return $result;
     }    
+    public function getUsuariByCerca($usuari,$id){ 
+        //$sql = "SELECT * FROM usuaris WHERE id <> ".$id." AND admin = 0 AND ";
+        $sql = "SELECT * FROM usuaris u WHERE u.id <> ".$id." AND u.admin = 0 AND 
+                (usuari LIKE '%".$usuari."%' OR nom LIKE '%".$usuari."%' OR cognom LIKE '%".$usuari."%')
+                AND u.id NOT IN ( SELECT usuari_envia  FROM solicitud_amistat WHERE aceptada = 1)
+                AND u.id NOT IN ( SELECT usuari_rep FROM solicitud_amistat WHERE aceptada = 1)";
+        $result = mysql_query($sql);
+        return $result;
+    }
     public function getUsuariByID($id){ // Suposem que la ID es el camp Usuari (Nickname)
         $sql = "SELECT * FROM usuaris WHERE id = '".$id."'";
         $result = mysql_query($sql);
