@@ -34,7 +34,7 @@ if($_GET["idcompra"]){
         $carro[$num]["preu"] = $atraccions->getPreuByID($_GET["idcompra"]);
         $carro[$num]["quantitat"] = 1;
         $carro[$num]["idAtraccio"] = $_GET["idcompra"];
-        $carro[$num]["nomAtraccio"] = utf8_encode($atraccions->getNomAtraccionByID($_GET["idcompra"]));
+        $carro[$num]["nomAtraccio"] = $atraccions->getNomAtraccionByID($_GET["idcompra"]);
         $_SESSION["carro"] = $carro;
     }
 }
@@ -169,7 +169,7 @@ if($_GET["comprar"]){
                                         echo "<p><b>Últimos anuncios:</b></p>";
                                         $result = $atraccions->getAtraccionsUltimes();
 					for($x = 0; $x < 5 && mysql_num_rows($result) > $x; $x++){			
-                                            echo "<div id='recomendacion'>".utf8_encode(substr(mysql_result($result,$x,1),0,20))."...</div>";
+                                            echo "<div id='recomendacion'>".substr(mysql_result($result,$x,1),0,20)."...</div>";
 					} 
 				?>
 		
@@ -241,9 +241,9 @@ if($_GET["comprar"]){
                             $numAtracciones++;
                             echo '<a class="iframes fancybox.iframe" href="atraccions.php?id='.mysql_result($result,$i,0).'">';
                             echo '<div id="atraccion">';
-                            echo '  <div id="titulo_atraccion"><b>'.utf8_encode(mysql_result($result,$i,1)).'</b></div>';
+                            echo '  <div id="titulo_atraccion"><b>'.mysql_result($result,$i,1).'</b></div>';
                             echo '	<div id="foto_atraccion"><img width="70px" height="70px" src="'.mysql_result($result,$i,9).'"/></div>';
-                            echo '	<div id="descripcion_atraccion">'.utf8_encode(substr(mysql_result($result,$i,2),0,90)).'..."</div> ';         
+                            echo '	<div id="descripcion_atraccion">'.substr(mysql_result($result,$i,2),0,90).'..."</div> ';         
                             echo '</div></a>';
                         }
                     }

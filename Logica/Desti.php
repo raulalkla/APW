@@ -28,33 +28,34 @@ class Desti {
         return $result;
     }
     public function getNomByID($id){
-        $sql = "SELECT nom FROM desti WHERE id = ".$id;
+        $sql = "SELECT id, nom FROM desti WHERE id = ".$id." ORDER BY 1";
+        //echo $sql;
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, 0));
+        return mysql_result($result, 0, 1);
     }
     public function getIdDesti($num){
-        $sql = "SELECT Id FROM desti";
+        $sql = "SELECT Id FROM desti ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
         return mysql_result($result, $num, 0);
     }
     public function getNomDesti($num){
-        $sql = "SELECT nom FROM desti";
+        $sql = "SELECT id, nom FROM desti ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 0));
+        return mysql_result($result, $num, 1);
     }
     public function getUbicacio($num){
-        $sql = "SELECT ubicacio FROM desti";
+        $sql = "SELECT id, ubicacio FROM desti ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 0));
+        return mysql_result($result, $num, 1);
     }
     public function getEstat($num){
-        $sql = "SELECT estat FROM desti";
+        $sql = "SELECT id, estat FROM desti ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getNumDestins() {
         $sql = "SELECT count(*) FROM desti";
@@ -63,7 +64,7 @@ class Desti {
     }
     public function setDesti($nom, $ubicacio, $nomEstat){
         $sql = "INSERT INTO desti (nom, ubicacio, estat) VALUES (\"$nom\", \"$ubicacio\", (SELECT id FROM estat WHERE tipus = \"$nomEstat\") )";
-        //echo $sql."  ";
+        echo $sql."  ";
         $result = mysql_query($sql);
         return $result;
     }

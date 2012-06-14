@@ -12,34 +12,34 @@ class Promocio {
         return $result;
     }
     public function getIdDesti($num){
-        $sql = "SELECT Id FROM promocio";
+        $sql = "SELECT Id FROM promocio ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
         return mysql_result($result, $num, 0);
     }
     public function getDataIni($num){
-        $sql = "SELECT data_inici FROM promocio";
+        $sql = "SELECT id, data_inici FROM promocio ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getDataFi($num){
-        $sql = "SELECT data_fi FROM promocio";
+        $sql = "SELECT id, data_fi FROM promocio ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getDescripcio($num){
-        $sql = "SELECT descripcio FROM promocio";
+        $sql = "SELECT id, descripcio FROM promocio ORDER BY 1";
         //echo $sql;
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 0));
+        return mysql_result($result, $num, 1);
     }
     public function getDescripcioByID($id){
         $sql = "SELECT descripcio FROM promocio WHERE id = $id";
         //echo $sql;
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, 0));
+        return mysql_result($result, 0);
     }
     public function getDescompte($num){
         $sql = "SELECT descompte FROM promocio";

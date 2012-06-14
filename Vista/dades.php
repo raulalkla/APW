@@ -35,7 +35,7 @@ require_once '../Logica/Usuaris.php';
         if(@$_POST){ 
          
             $usuari = new Usuaris();
-            $usuari->updateUsuari(@utf8_encode($_POST[nom]),@utf8_encode($_POST[cognom]),@utf8_encode($_POST[dni]),@utf8_encode($_POST[usuari]),@utf8_encode($_POST[pass]));
+            $usuari->updateUsuari($_POST[nom], $_POST[cognom], $_POST[dni], $_POST[usuari], $_POST[pass]);
             echo "<p><B>Datos modificados correctamente</B></p>";
         }
         else{
@@ -47,19 +47,19 @@ require_once '../Logica/Usuaris.php';
             echo "<table border=0 style='font-size:12px'>";
             echo    "<tr>";
             echo        "<td>Nombre:</td>";
-            echo        '<td><input type="text" name="nom" value="'.utf8_encode(mysql_result($result,0,1)).'"></td>';
+            echo        '<td><input type="text" name="nom" value="'.mysql_result($result,0,1).'"></td>';
             echo    "</tr>";
             echo        "<td>Apellido:</td>";
-            echo        '<td><input type="text" name="cognom" value="'.utf8_encode(mysql_result($result,0,2)).'"></td>';
+            echo        '<td><input type="text" name="cognom" value="'.mysql_result($result,0,2).'"></td>';
             echo    "</tr>";
             echo        "<td>DNI:</td>";
-            echo        '<td><input type="text" name="dni" value="'.utf8_encode(mysql_result($result,0,3)).'"></td>';
+            echo        '<td><input type="text" name="dni" value="'.mysql_result($result,0,3).'"></td>';
             echo    "</tr>";
             echo        "<td>Usuario:</td>";
-            echo        '<td><input type="text" name="usuari" value="'.utf8_encode(mysql_result($result,0,4)).'"></td>';
+            echo        '<td><input type="text" name="usuari" value="'.mysql_result($result,0,4).'"></td>';
             echo    "</tr>";
             echo        "<td>Password:</td>";
-            echo        '<td><input type="password" name="pass" value="'.utf8_encode(mysql_result($result,0,5)).'"></td>';
+            echo        '<td><input type="password" name="pass" value="'.mysql_result($result,0,5).'"></td>';
             echo    "</tr>";   
             echo    "<tr>";
             echo        "<td></td>";

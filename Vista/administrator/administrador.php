@@ -153,3 +153,7 @@ $con = new Connexio();
         </div>
     </body>
 </html>
+        
+<pre>
+<?php print_r($_POST); ?>
+</pre>
