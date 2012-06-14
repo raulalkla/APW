@@ -42,7 +42,7 @@ if($_GET["comprar"]){
     $num = sizeof($_SESSION["carro"]);
     $lp = new LiniaPedido();
     for($i=0; $i < $num; $i++){
-        $resul = $lp->insertLinea($_SESSION["carro"][$i]["preu"], $_GET["quant$i"], $_SESSION["carro"][$i]["idAtraccio"], $_SESSION["idUsuario"]);
+        $resul = $lp->insertLinea($_SESSION["carro"][$i]["preu"]*$_GET["quant$i"], $_GET["quant$i"], $_SESSION["carro"][$i]["idAtraccio"], $_SESSION["idUsuario"]);
         if(!$resul) echo "Error en la compra!";
     }
     unset($_SESSION["carro"]);
@@ -169,7 +169,7 @@ if($_GET["comprar"]){
                                         echo "<p><b>Últimos anuncios:</b></p>";
                                         $result = $atraccions->getAtraccionsUltimes();
 					for($x = 0; $x < 5 && mysql_num_rows($result) > $x; $x++){			
-                                            echo "<div id='recomendacion'>".substr(mysql_result($result,$x,1),0,20)."...</div>";
+                                            echo "<div id='recomendacion'>".mysql_result($result,$x,1)."</div>";
 					} 
 				?>
 		
