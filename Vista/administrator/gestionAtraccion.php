@@ -2,6 +2,11 @@
 <?php
     session_start();
     require_once '../../Logica/Connexio.php';
+    require_once '../../Logica/Desti.php';
+    require_once '../../Logica/Estat.php';
+    require_once '../../Logica/Atraccions.php';
+    require_once '../../Logica/TipusAtraccions.php';
+    require_once '../../Logica/Promocio.php';
     
     $con = new Connexio();
     
@@ -16,16 +21,23 @@
         
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#form").bind("submit", function() {
-                    $.ajax({ 
-                            type    : "POST", 
-                            cache   : false, 
-                            url     : "altaAtraccion.php", 
-                            data    : $(this).serializeArray()
-                    }); 
-                    return false; 
+                $(".iframes").fancybox({
+                    maxWidth	: 800,
+                    maxHeight	: 600,
+                    fitToView	: false,
+                    width		: '70%',
+                    height		: '70%',
+                    autoSize	: false,
+                    closeClick	: false,
+                    openEffect	: 'none',
+                    closeEffect	: 'none',
+                    onClosed: function() { window.location.href = "administrador.php"; }
                 });
-            }
+                $('a.idEliminar').click(function(){
+                    var txt=$(this).attr("rel");
+                    $("#contenedorAdmin").load("gestionAtraccion.php?idEliminar="+txt); 
+                });
+            });
         </script>
         
         <style type="text/css">
@@ -37,7 +49,7 @@
                     border-color: #999999;
                     border-collapse: collapse;
                     margin-left: 3%;
-                    padding: 5%;
+                    width: 875px;
             }
             table.hovertable th {
                     background-color:#c3dde0;
@@ -61,13 +73,20 @@
     <body>
         <div id="contenedor">
         <?php 
-            $sql = "SELECT a.nom, a.descripcio, a.durada, a.preu, a.estat, a.puntuacio, a.desti, a.promocio,a.tipus_atraccio
-                    FROM atraccio a";
-            //echo $sql;
-            $result = $con->query($sql);
+            $atraccio = new Atraccions();
+            $estat = new Estat();
+            $tAtrac = new TipusAtraccions();
+            $desti = new Desti();
+            $promocio = new Promocio();
             
-            $sql = "Select * FROM estat";
-            $resEstat = $con->query($sql);
+            if($_GET['idEliminar']){
+                if($atraccio->delete($_GET['idEliminar'])){
+                    echo "<h2>Atracción eliminada!</h2>";
+                }
+                else{
+                    echo "<h2>Error! Atracción no eliminada!</h2>";
+                }
+            }
         ?>
             <form id="form" method="POST">
             <table class="hovertable">
@@ -81,42 +100,29 @@
                     <td><b> Destino </b></td>
                     <td><b> Promocion </b></td>
                     <td><b> Tipo </b></td>
+                    <td><b> Editar </b></td>
+                    <td><b> Eliminar </b></td>
                 </tr>
                 <?php
-                for($i = 0; $i < mysql_num_rows($result); $i++){
+                for($i = 0; $i < $atraccio->getNumAtraccions(); $i++){
                     echo "<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">";
-                        echo "<td>"; echo mysql_result($result, $i, 0); echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 1);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 2);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 3);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 4);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 5);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 6);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 7);echo "</td>";
-                        echo "<td>"; echo mysql_result($result, $i, 8);echo "</td>";
+                        echo "<td>".$atraccio->getNom($i)."</td>";
+                        echo "<td>".substr($atraccio->getDescripcio($i), 0, 25)." ...</td>";
+                        echo "<td>".$atraccio->getDurada($i)." días</td>";
+                        echo "<td>".$atraccio->getPreu($i)."</td>";
+                        echo "<td>".$estat->getTipusEstatByID($atraccio->getIdEstat($i))."</td>";
+                        echo "<td>".$atraccio->getPuntuacio($i)."</td>";
+                        echo "<td>".$desti->getNomByID($atraccio->getIdDesti($i))."</td>";
+                        echo "<td> ".@$promocio->getDescripcioByID($atraccio->getIdPromocio($i))."</td>";
+                        echo "<td>".$tAtrac->getNomByID($atraccio->getIdTipusAtraccio($i))."</td>";
+                        echo "<td> <a href='modificarAtraccion.php?id=$i' class='iframes fancybox.iframe'> <img src='../img/edit.png' height=15px /> </a> </td>";
+                        echo "<td> <a class='idEliminar' href='#' rel='".$desti->getIdDesti($i)."' OnClick=\"return confirm('Segur que vols eliminar?');\"> <img src='../img/drop.png' /> </a> </td>";
                     echo "</tr>";
                 }
                 ?>
-                <tr>
-                    <td> <input type="text" name="nomAtrac"> </td>
-                    <td> <input type="text" name="descr"> </td>
-                    <td> <input type="text" name="duracion" size="4"> </td>
-                    <td> <input type="text" name="precio" size="4"> </td>
-                    <td> <input type="text" name="estado"> </td>
-                    <td> </td>
-                    <td> <input type="text" name="destino"> </td>
-                    <td> <input type="text" name="promocion"> </td>
-                    <td> 
-                        <select name="tipo"> 
-                            <?php for($j = 0; $j < mysql_num_rows($resEstat); $j++){
-                                        echo "<option>".mysql_result($resEstat, $j, 1)."</option>";
-                                  } ?>
-                        </select>
-                    </td>
-                    <td> <input type="submit" value="Anadir"> </td>
-                </tr>
             </table>
         </form>
+        <a href='anadirAtraccion.php' class="iframes fancybox.iframe"> <img src='../img/add.png' height=25px /> </a>
         </div>
     </body>
 </html>
