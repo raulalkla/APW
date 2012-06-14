@@ -12,6 +12,15 @@ class Atraccions {
         $result = mysql_query($sql);
         return $result;
     }
+    public function getAtraccionsAmics($idAmic){
+        $sql = "SELECT DISTINCT (a.id)
+                FROM historic_compres hd
+                LEFT JOIN linies_comanda lc ON hd.linia_comanda = lc.id
+                LEFT JOIN atraccio a ON lc.atraccio = a.id
+                WHERE hd.usuari = ".$idAmic;
+        $result = mysql_query($sql);
+        return $result;
+    }   
     public function getAtraccionByID($id){
         $sql = "SELECT * FROM atraccio WHERE id = ".$id;
         $result = mysql_query($sql);
@@ -24,6 +33,7 @@ class Atraccions {
     }
     public function getAtraccionByDesti($id){
         $sql = "SELECT * FROM atraccio WHERE desti = ".$id;
+        
         $result = mysql_query($sql);
         return $result;
     }

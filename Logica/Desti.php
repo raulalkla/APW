@@ -16,6 +16,17 @@ class Desti {
         $result = mysql_query($sql);
         return $result;
     }
+    // Obtenim els destins on ha comprat un amic
+    public function getDestiByAmic($idAmics){
+        $sql = "SELECT DISTINCT (a.desti)
+                FROM historic_compres hd
+                LEFT JOIN linies_comanda lc ON hd.linia_comanda = lc.id
+                LEFT JOIN atraccio a ON lc.atraccio = a.id
+                WHERE hd.usuari = ".$idAmics;
+        // echo $sql;
+        $result = mysql_query($sql);
+        return $result;
+    }
     public function getNomByID($id){
         $sql = "SELECT nom FROM desti WHERE id = ".$id;
         $result = mysql_query($sql);

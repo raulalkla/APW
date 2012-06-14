@@ -84,6 +84,9 @@ if($_GET["comprar"]){
 	   $("#miPerfil").click(function(evento){ 
                $("#contenedor_atraccion").load("perfil.php"); 
            });
+           $("#recomanacions").click(function(){
+               $("#contenedor_atraccion").load("recomanacions.php"); 
+            });   
            
 	});
 
@@ -173,20 +176,10 @@ if($_GET["comprar"]){
 			</div>
 		</div>
                 <div id="contenedor_atraccion">
-                <?php 
-                 
-                  if($_GET[recomendaciones]){
-                      echo "<br><p style='float:left; font-size:15px'>Destinos:</p>";
-                  }else{
-                
-                
-                ?>
+               
                 <div style="">
-                    
-                    <p style="display:inline; font-size: 15px; margin-right: 6%"><B><a href="?recomendaciones=1" style="display:inline">¡Ver recomendaciones!</a></B></p> 
+                   <p style="display:inline; font-size: 15px; margin-right: 6%"><B><a href='#' id='recomanacions' style="display:inline">¡Ver recomendaciones!</a></B></p> 
                   
-                    
-                   
                    <form name="form" method="POST" style="display:inline;">
                        Destino: <select onchange="document.form.submit()" name="destino">
                             <?php
@@ -252,7 +245,7 @@ if($_GET["comprar"]){
                         }
                     }
                     if($numAtracciones == 0) echo "<p style='float:left'><br><B>&nbsp;&nbsp; - No hay atracciones para tu búsqueda!</B></p>";
-                  }?>
+                 ?>
                 </div>
         </div>
         <div id="peu"></div>
