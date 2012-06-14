@@ -66,8 +66,14 @@ $usuario = new Usuaris();
        }
         echo "<div id='contenedorBusqueda'>";
         if($_POST || $_GET){
-            
-            $result = $usuario->getUsuariByCerca($_POST[nombre],$_SESSION[idUsuario]);
+            if(isset($_POST[nombre])){
+                $result = $usuario->getUsuariByCerca($_POST[nombre],$_SESSION[idUsuario]);
+                $_SESSION[nombreBusqueda] = $_POST[nombre];
+            }
+            else {
+                 $result = $usuario->getUsuariByCerca( $_SESSION[nombreBusqueda],$_SESSION[idUsuario]);
+           
+            }
             if(mysql_num_rows($result) > 0 ){
 
                 echo "<p style='text-align:left; font-size:14px'><B>Resultados:</B></p>";
@@ -105,11 +111,9 @@ $usuario = new Usuaris();
         }
             echo "</div>";
             
-
         if($_POST[idComentario]){
             $solAmistad = new SolicitudAmistat();
             $solAmistad->setSolicitudAmistat($_SESSION[idUsuario],$_POST[idComentario], $_POST[comentario]);
-
         }
         ?>
         

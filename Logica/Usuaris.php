@@ -18,6 +18,7 @@ class Usuaris {
                 (usuari LIKE '%".$usuari."%' OR nom LIKE '%".$usuari."%' OR cognom LIKE '%".$usuari."%')
                 AND u.id NOT IN ( SELECT usuari_envia  FROM solicitud_amistat WHERE aceptada = 1)
                 AND u.id NOT IN ( SELECT usuari_rep FROM solicitud_amistat WHERE aceptada = 1)";
+       // echo $sql;
         $result = mysql_query($sql);
         return $result;
     }
