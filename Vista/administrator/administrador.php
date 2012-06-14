@@ -48,7 +48,8 @@ $atraccio = new Atraccions();
                 hAxis: {title: 'Atraccion', titleTextStyle: {color: 'red'}}
                 };
 
-                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                //var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             }
         </script>
