@@ -16,8 +16,8 @@ class Usuaris {
         //$sql = "SELECT * FROM usuaris WHERE id <> ".$id." AND admin = 0 AND ";
         $sql = "SELECT * FROM usuaris u WHERE u.id <> ".$id." AND u.admin = 0 AND 
                 (usuari LIKE '%".$usuari."%' OR nom LIKE '%".$usuari."%' OR cognom LIKE '%".$usuari."%')
-                AND u.id NOT IN ( SELECT usuari_envia  FROM solicitud_amistat WHERE aceptada = 1)
-                AND u.id NOT IN ( SELECT usuari_rep FROM solicitud_amistat WHERE aceptada = 1)";
+                AND u.id NOT IN ( SELECT usuari_envia  FROM solicitud_amistat WHERE usuari_rep = ".$id." AND aceptada = 1)
+                AND u.id NOT IN ( SELECT usuari_rep FROM solicitud_amistat WHERE usuari_envia = ".$id." AND aceptada = 1)";
        // echo $sql;
         $result = mysql_query($sql);
         return $result;
