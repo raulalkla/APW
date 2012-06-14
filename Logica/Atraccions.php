@@ -39,34 +39,39 @@ class Atraccions {
         return utf8_encode(mysql_result($result, $num, 0));
     }
     public function getDescripcio($num) {
-        $sql = "SELECT descripcio FROM atraccio";
+        $sql = "SELECT id, descripcio FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return utf8_encode(mysql_result($result, $num, 0));
+        return utf8_encode(mysql_result($result, $num, 1));
     }
     public function getDurada($num) {
-        $sql = "SELECT durada FROM atraccio";
+        $sql = "SELECT id, durada FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getPreu($num) {
-        $sql = "SELECT preu FROM atraccio";
+        $sql = "SELECT id, preu FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getIdEstat($num) {
-        $sql = "SELECT estat FROM atraccio";
+        $sql = "SELECT id, estat FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getPuntuacio($num) {
-        $sql = "SELECT puntuacio FROM atraccio";
+        $sql = "SELECT id, puntuacio FROM atraccio ORDER BY 1";
+        $result = mysql_query($sql);
+        return mysql_result($result, $num, 1);
+    }
+    public function getIdAtraccio($num) {
+        $sql = "SELECT id FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
         return mysql_result($result, $num, 0);
     }
     public function getIdDesti($num) {
-        $sql = "SELECT desti FROM atraccio";
+        $sql = "SELECT id, desti FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getIdPromocio($num) {
         $sql = "SELECT id, promocio FROM atraccio ORDER BY 1";
@@ -75,14 +80,14 @@ class Atraccions {
         return mysql_result($result, $num, 1);
     }
     public function getImatge($num) {
-        $sql = "SELECT imatge FROM atraccio";
+        $sql = "SELECT id, imatge FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getIdTipusAtraccio($num) {
-        $sql = "SELECT tipus_atraccio FROM atraccio";
+        $sql = "SELECT id, tipus_atraccio FROM atraccio ORDER BY 1";
         $result = mysql_query($sql);
-        return mysql_result($result, $num, 0);
+        return mysql_result($result, $num, 1);
     }
     public function getNumAtraccions() {
         $sql = "SELECT count(*) FROM atraccio";
@@ -96,9 +101,18 @@ class Atraccions {
         $result = mysql_query($sql);
         return $result;
     }
-    public function update($id, $nom, $descr, $durada, $preu, $estat, $desti, $promocio, $imatge, $tipusAtraccio){
-        $sql = "UPDATE atraccio SET nom = \"$nom\", descripcio = \"$descr\", durada = $durada, preu = $preu, estat = (SELECT id FROM estat WHERE tipus = \"$estat\"), desti = (SELECT id FROM deti WHERE nom = \"$desti\"), promocio = (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), imatge = \"$imatge\", tipus_atraccio = (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\")  WHERE id = $id";
+    public function update($id, $nom, $descr, $durada, $preu, $estat, $desti, $promocio, $tipusAtraccio, $imatge){
+        if($imatge != "\"null\"")
+            $sql = "UPDATE atraccio SET nom = \"$nom\", descripcio = \"$descr\", durada = $durada, preu = $preu, estat = (SELECT id FROM estat WHERE tipus = \"$estat\"), desti = (SELECT id FROM desti WHERE nom = \"$desti\"), promocio = (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), tipus_atraccio = (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\"), imatge = $imatge   WHERE id = $id";
+        else
+            $sql = "UPDATE atraccio SET nom = \"$nom\", descripcio = \"$descr\", durada = $durada, preu = $preu, estat = (SELECT id FROM estat WHERE tipus = \"$estat\"), desti = (SELECT id FROM desti WHERE nom = \"$desti\"), promocio = (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), tipus_atraccio = (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\")  WHERE id = $id";
         //echo $sql."  ";
+        $result = mysql_query($sql);
+        return $result;
+    }
+    public function insert($nom, $descr, $durada, $preu, $estat, $desti, $promocio, $tipusAtraccio, $imatge) {
+        $sql = utf8_encode("INSERT INTO `atraccio`(`nom`, `descripcio`, `durada`, `preu`, `estat`, `desti`, `promocio`, `tipus_atraccio`, `imatge`) VALUES (\"$nom\", \"".utf8_encode ($descr)."\", $durada, $preu, (SELECT id FROM estat WHERE tipus = \"$estat\"), (SELECT id FROM desti WHERE nom = \"$desti\"), (SELECT id FROM promocio WHERE descripcio = \"$promocio\"), (SELECT id FROM tipus_atraccio WHERE nom = \"$tipusAtraccio\"), $imatge)");
+        //echo $sql;
         $result = mysql_query($sql);
         return $result;
     }

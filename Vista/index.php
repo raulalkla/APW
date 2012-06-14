@@ -14,7 +14,7 @@ $Connexio->selectdb("socialtravel");
 $atraccions = new Atraccions();
 $desti = new Desti();
 $tipusAtraccio = new TipusAtraccions();
-print_r($_SESSION);
+
 if(@$_GET[logout])    session_unset();
 if($_GET["idcompra"]){
     $num = sizeof($_SESSION["carro"]);

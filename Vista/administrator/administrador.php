@@ -3,6 +3,7 @@ session_start();
 require_once '../../Logica/Connexio.php';
 require_once '../../Logica/Desti.php';
 require_once '../../Logica/TipusAtraccions.php';
+require_once '../../Logica/Atraccions.php';
 
 if(!$_SESSION[usuari]){
     header("Location: index.php");
@@ -73,7 +74,8 @@ $con = new Connexio();
                 <div id='contenedorAdmin'>
                     <?php 
                     if($_POST){
-                        if($_POST[anadirDesti]){ // Alta Destino
+                        // ************* Alta Destino ******************
+                        if($_POST[anadirDesti]){ 
                             $desti = new Desti();
                             if($desti->setDesti($_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
                                 echo "<h2>Destino insertado!</h2>";
@@ -82,7 +84,8 @@ $con = new Connexio();
                                 echo "<h2>Error! Destino no insertado!</h2>";
                             }
                         }
-                        else if($_POST[modifDesti]){ // Modificar Destino
+                        // ************* Modificar Destino *****************
+                        else if($_POST[modifDesti]){ 
                             $desti = new Desti();
                             if($desti->modifDesti($_POST[idDest],$_POST[nomDest], $_POST[ubicacio], $_POST[estat])){
                                 echo "<h2>Destino modificado!</h2>";
@@ -91,19 +94,53 @@ $con = new Connexio();
                                 echo "<h2>Error! Destino no modificado!</h2>";
                             }
                         }
-                        else if($_POST[anadirTAtrac]){ // Alta Tipus Atraccion
+                        // ************* Alta Tipus Atraccion *************
+                        else if($_POST[anadirTAtrac]){ 
                             $tAtrac = new TipusAtraccions();
                             if($tAtrac->setTipusAtraccions($_POST[nomTAtrac], $_POST[descripcioTAtrac], $_POST[estatTAtrac]))
                                   echo "<h2>Tipo de atraccion insertado!</h2>";
                             else
                                 echo "<h2>Error! Tipo de atraccion no insertado!</h2>";
                         }
+                        // ************* Modificar Tipus Atraccions *************
                         else if($_POST[modifTAtrac]){
                             $tAtrac = new TipusAtraccions();
                             if($tAtrac->modifTipusAtraccions($_POST[idTAtrac], $_POST[nomTAtrac], $_POST[ubicacioTAtrac], $_POST[estatTAtrac]))
                                 echo "<h2>Tipo de atraccion modificado!</h2>";
                             else
                                 echo "<h2>Error! Tipo de atraccion no modificado!</h2>";
+                        }
+                        //************* Alta Atraccio *************
+                        else if($_POST[anadirAtraccion]){
+                            //uploat image
+                            $archivo = $_FILES['imagen']['name'];
+                            $tmp = $_FILES['imagen']['tmp_name'];
+                            $destino = "../img/atraccions/".$archivo;
+                            @move_uploaded_file($tmp,$destino);
+                            
+                            $atrac = new Atraccions();
+                            if($atrac->insert($_POST[nomAtrac], $_POST[descr], $_POST[duracion], $_POST[precio], $_POST[estado], $_POST[destino], $_POST[promocion], $_POST[tipo], "\"".substr($destino, 3)."\""))
+                                  echo "<h2>Atraccion insertado!</h2>";
+                            else
+                                echo "<h2>Error! Atraccion no insertado!</h2>";  
+                        }
+                        //************* Modificar Atraccio *************
+                        else if($_POST[modificarAtraccion]){
+                            //uploat image
+                            if($_FILES['imagen']['name']){
+                                $archivo = $_FILES['imagen']['name'];
+                                $tmp = $_FILES['imagen']['tmp_name'];
+                                $destino = "../img/atraccions/".$archivo;
+                                @move_uploaded_file($tmp,$destino);
+                            }
+                            else
+                                $destino = "../null";
+                                
+                                $atrac = new Atraccions();
+                                if($atrac->update($_POST[idAtraccio] ,$_POST[nomAtrac], $_POST[descr], $_POST[duracion], $_POST[precio], $_POST[estado], $_POST[destino], $_POST[promocion], $_POST[tipo], "\"".substr($destino, 3)."\""))
+                                    echo "<h2>Atraccion actualizada!</h2>";
+                                else
+                                    echo "<h2>Error! Atraccion no actualizada!</h2>";  
                         }
                     }
                     else{
@@ -116,7 +153,3 @@ $con = new Connexio();
         </div>
     </body>
 </html>
-        
-<pre>
-<?php print_r($_POST); ?>
-</pre>
