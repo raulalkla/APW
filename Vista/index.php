@@ -7,7 +7,6 @@ require_once '../Logica/LiniaPedido.php';
 require_once '../Logica/Desti.php';
 require_once '../Logica/TipusAtraccions.php';
 
-
 $Connexio = new Connexio();
 $Connexio->connectar();
 $Connexio->selectdb("socialtravel");
@@ -31,7 +30,8 @@ if($_GET["idcompra"]){
     }
     
     if($nuevaCompra){
-        $carro[$num]["preu"] = $atraccions->getPreuByID($_GET["idcompra"]);
+        if($_GET[dsc]==1) $carro[$num]["preu"] = ($atraccions->getPreuByID($_GET["idcompra"]))-($atraccions->getPreuByID($_GET["idcompra"])*0.1);        
+        else $carro[$num]["preu"] = $atraccions->getPreuByID($_GET["idcompra"]);
         $carro[$num]["quantitat"] = 1;
         $carro[$num]["idAtraccio"] = $_GET["idcompra"];
         $carro[$num]["nomAtraccio"] = $atraccions->getNomAtraccionByID($_GET["idcompra"]);
