@@ -257,6 +257,6 @@ if($_GET["comprar"]){
 </html>
 
 <?php
-    echo "<pre>";
-    print_r($_GET);
+    //echo "<pre>";
+    //print_r($_GET);
 ?>
