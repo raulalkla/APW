@@ -40,7 +40,7 @@ class LiniaPedido {
         $sql = "INSERT INTO linies_comanda (preu, cantitat, atraccio) values( ".$preu.", ".$cantitat.", ".$atraccio.")";
         mysql_query($sql);
         echo $sql."<br>";
-        $sql = "INSERT INTO historic_compres (usuari, linia_comanda) values( ".$idUsuari.", (SELECT MAX(id) FROM linies_comanda WHERE preu=".$preu." AND cantitat=".$cantitat." AND atraccio=".$atraccio."))";
+        $sql = "INSERT INTO historic_compres (usuari, linia_comanda) values( ".$idUsuari.", (SELECT MAX(id) FROM linies_comanda WHERE preu like ".$preu." AND cantitat=".$cantitat." AND atraccio=".$atraccio."))";
         $resul = mysql_query($sql);
         echo $sql."<br>";
         if($resul){
