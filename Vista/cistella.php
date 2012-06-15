@@ -95,7 +95,7 @@ $_SESSION['carro']= @array_values($_SESSION['carro']);
                 </table>
                 Forma pago: 
                 <select name="formaPago">
-                    <option>Targeta</option>
+                    <option>Tarjeta</option>
                     <option>Paypal</option>
                     <option>Móvil</option>
                 </select>

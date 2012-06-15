@@ -17,7 +17,7 @@ require_once '../Logica/SolicitudAmistat.php';
     </head>
     <body>
         <?php
-        
+        if($_SESSION[idUsuario]){
         $resultAmigos = $amistat->getAmistadByUser($_SESSION[idUsuario]);
                      
         $atraccionesAmigos = array();
@@ -43,7 +43,7 @@ require_once '../Logica/SolicitudAmistat.php';
             }
         }
         
-        
+        }
         if(@$_GET[id])
         {
             
