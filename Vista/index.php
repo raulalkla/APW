@@ -30,8 +30,11 @@ if($_GET["idcompra"]){
     }
     
     if($nuevaCompra){
-        if($_GET[dsc]==1) $carro[$num]["preu"] = ($atraccions->getPreuByID($_GET["idcompra"]))-($atraccions->getPreuByID($_GET["idcompra"])*0.1);        
-        else $carro[$num]["preu"] = $atraccions->getPreuByID($_GET["idcompra"]);
+        
+        if($_GET[dsc]==1) $precio = ($atraccions->getPreuByID($_GET["idcompra"]))-($atraccions->getPreuByID($_GET["idcompra"])*0.1);         
+        else $precio = $atraccions->getPreuByID($_GET["idcompra"]);
+      //  echo $precio;
+        $carro[$num]["preu"] = $precio;
         $carro[$num]["quantitat"] = 1;
         $carro[$num]["idAtraccio"] = $_GET["idcompra"];
         $carro[$num]["nomAtraccio"] = $atraccions->getNomAtraccionByID($_GET["idcompra"]);

@@ -32,25 +32,26 @@ class LiniaPedido {
     }
     
     public function insertLinea($preu, $cantitat, $atraccio, $idUsuari){
+       // echo $preu;
         $sql = "SET AUTOCOMMIT=0;";
         mysql_query($sql);
         $sql = "BEGIN;";
         mysql_query($sql);
         $sql = "INSERT INTO linies_comanda (preu, cantitat, atraccio) values( ".$preu.", ".$cantitat.", ".$atraccio.")";
         mysql_query($sql);
-//        echo $sql."<br>";
+        echo $sql."<br>";
         $sql = "INSERT INTO historic_compres (usuari, linia_comanda) values( ".$idUsuari.", (SELECT MAX(id) FROM linies_comanda WHERE preu=".$preu." AND cantitat=".$cantitat." AND atraccio=".$atraccio."))";
         $resul = mysql_query($sql);
-//        echo $sql."<br>";
+        echo $sql."<br>";
         if($resul){
             $sql = "COMMIT;";
             mysql_query($sql);
-//            echo "Commit! <br>";
+            echo "Commit! <br>";
         }
         else{
             $sql = "ROLLBACK;";
             $resul = mysql_query($sql);
-//            echo "Rollback<br>";
+            echo "Rollback<br>";
         }
         return $resul;
     }
