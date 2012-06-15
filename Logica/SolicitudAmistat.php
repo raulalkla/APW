@@ -32,7 +32,7 @@ class SolicitudAmistat {
     }
     public function setSolicitudAmistat($idEnvia,$idRep,$comentari){
         $sql = "INSERT INTO solicitud_amistat(usuari_envia,usuari_rep,comentari) VALUES(".$idEnvia.",".$idRep.",'".$comentari."')";
-        echo $sql;
+        //echo $sql;
         mysql_query($sql);
         
     }
